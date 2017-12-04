@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Air.Windows;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Air
@@ -23,6 +24,13 @@ namespace Air
         private void DradWindow(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Management management = new Management();
+            management.Show();
+            Close();
         }
     }
 }

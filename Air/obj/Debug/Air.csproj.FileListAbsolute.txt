@@ -19,3 +19,5 @@ D:\courseWork\Air\Air\obj\Debug\Air.exe
 D:\courseWork\Air\Air\obj\Debug\Air.pdb
 D:\courseWork\Air\Air\obj\Debug\LoginWindow.g.cs
 D:\courseWork\Air\Air\obj\Debug\LoginWindow.baml
+D:\courseWork\Air\Air\obj\Debug\Windows\Management.g.cs
+D:\courseWork\Air\Air\obj\Debug\Windows\Management.baml
