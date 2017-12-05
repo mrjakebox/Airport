@@ -14,6 +14,8 @@ namespace Air.Models
         private string _airlinePhone;
         private string _airlineAddress;
 
+        public AirlineModel() { }
+
         public int AirlineID
         {
             get => _airlineID;
