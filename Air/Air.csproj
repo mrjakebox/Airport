@@ -73,13 +73,14 @@
     <Compile Include="ModelRepository\CityRepository.cs" />
     <Compile Include="ModelRepository\CountryRepository.cs" />
     <Compile Include="ModelRepository\PlaneRepository.cs" />
+    <Compile Include="ModelRepository\FlightRepository.cs" />
     <Compile Include="Models\AirlineModel.cs" />
     <Compile Include="Models\AirportModel.cs" />
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\PlaneModel.cs" />
     <Compile Include="Models\PropertyObservable.cs" />
-    <Compile Include="Models\ScheduleModel.cs" />
+    <Compile Include="Models\FlightModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ModelRepository\IRepository.cs" />
     <Compile Include="ViewModels\ManagementViewModel.cs" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Air.Models
 {
-    public class ScheduleModel : PropertyObservable
+    public class FlightModel : PropertyObservable
     {
         private int _flightID;
         private int _airportID;
@@ -29,8 +29,6 @@ namespace Air.Models
         private decimal _priceFirst;
         private DateTime _dateTimeStartGMT;
         private DateTime _dateTimeArrivalGMT;
-        private DateTime _filterBeginDate;
-        private DateTime _filterEndDate;
         private string _status;
 
         public int FlightID
@@ -245,26 +243,6 @@ namespace Air.Models
             {
                 _dateTimeArrivalGMT = value;
                 OnPropertyChanged("DateTimeArrivalGMT");
-            }
-        }
-
-        public DateTime FilterBeginDate
-        {
-            get => _filterBeginDate;
-            set
-            {
-                _filterBeginDate = value;
-                OnPropertyChanged("FilterBeginDate");
-            }
-        }
-
-        public DateTime FilterEndDate
-        {
-            get => _filterEndDate;
-            set
-            {
-                _filterEndDate = value;
-                OnPropertyChanged("FilterEndDate");
             }
         }
 
