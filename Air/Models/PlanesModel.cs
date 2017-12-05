@@ -13,9 +13,9 @@ namespace Air.Models
     {
         int _id;
         int _aircompanyID;
-        string _planeModel;
+        string _airplaneModel;
         string _planeNumber;
-        string _aircompanyName;
+        string _airlineName;
 
         public int PlaneID
         {
@@ -40,12 +40,12 @@ namespace Air.Models
         [RegularExpression(@"^[A-zА-я0-9-]+$", ErrorMessage = "The airplane model must contain only numbers, letters and a hyphen")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "The airplane model must contain from 3 to 20 characters")]
         [Required(ErrorMessage = "There is no airplane model")]
-        public string PlaneModel
+        public string AirplaneModel
         {
-            get => _planeModel;
+            get => _airplaneModel;
             set
             {
-                _planeModel = value;
+                _airplaneModel = value;
                 OnPropertyChanged("PlaneModel");
             }
         }
@@ -64,16 +64,16 @@ namespace Air.Models
             }
         }
 
-        [RegularExpression(@"^[A-zА-я]+$", ErrorMessage = "The aircompany name must contain only letters")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "The aircompany name must contain from 3 to 50 characters")]
-        [Required(ErrorMessage = "There is no aircompany name")]
-        public string AircompanyName
+        [RegularExpression(@"^[A-zА-я]+$", ErrorMessage = "The airline name must contain only letters")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "The airline name must contain from 3 to 50 characters")]
+        [Required(ErrorMessage = "There is no airline name")]
+        public string AirlineName
         {
-            get => _aircompanyName;
+            get => _airlineName;
             set
             {
-                _aircompanyName = value;
-                OnPropertyChanged("AircompanyName");
+                _airlineName = value;
+                OnPropertyChanged("AirlineName");
             }
         }
 
