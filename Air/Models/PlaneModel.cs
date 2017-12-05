@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Air.Models
 {
-    public class PlanesModel : INotifyPropertyChanged
+    public class PlaneModel : INotifyPropertyChanged
     {
         int _id;
-        int _aircompanyID;
+        int _airlineID;
         string _airplaneModel;
         string _onboardNumber;
         string _airlineName;
@@ -27,13 +27,13 @@ namespace Air.Models
             }
         }
 
-        public int AircompanyID
+        public int AirlineID
         {
-            get => _aircompanyID;
+            get => _airlineID;
             set
             {
                 _id = value;
-                OnPropertyChanged("AircompanyID");
+                OnPropertyChanged("AirlineID");
             }
         }
 
