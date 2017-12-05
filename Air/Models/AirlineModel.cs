@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace Air.Models
 {
-    class AirlineModel: PropertyObservable
+    public class AirlineModel: PropertyObservable
     {
-        private int _id;
+        private int _airlineID;
         private string _airlineName;
         private string _airlinePhone;
         private string _airlineAddress;
 
         public int AirlineID
         {
-            get => _id;
+            get => _airlineID;
             set
             {
-                _id = value;
+                _airlineID = value;
                 OnPropertyChanged("AirlineID");
             }
         }

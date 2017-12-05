@@ -11,7 +11,7 @@ namespace Air.Models
 {
     public class PlaneModel : PropertyObservable
     {
-        int _id;
+        int _planeID;
         int _airlineID;
         string _airplaneModel;
         string _onboardNumber;
@@ -19,10 +19,10 @@ namespace Air.Models
 
         public int PlaneID
         {
-            get => _id;
+            get => _planeID;
             set
             {
-                _id = value;
+                _planeID = value;
                 OnPropertyChanged("PlaneID");
             }
         }
@@ -32,7 +32,7 @@ namespace Air.Models
             get => _airlineID;
             set
             {
-                _id = value;
+                _planeID = value;
                 OnPropertyChanged("AirlineID");
             }
         }
