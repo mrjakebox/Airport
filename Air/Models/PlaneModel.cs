@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Air.Models
 {
-    public class PlaneModel : INotifyPropertyChanged
+    public class PlaneModel : PropertyObservable
     {
         int _id;
         int _airlineID;
@@ -75,13 +75,6 @@ namespace Air.Models
                 _airlineName = value;
                 OnPropertyChanged("AirlineName");
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

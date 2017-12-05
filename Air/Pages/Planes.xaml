@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Air.Windows"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="AIRCRAFTS">
+      Title="PLANES">
 
     <Grid>
         

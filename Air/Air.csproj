@@ -65,30 +65,32 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\AirlineModel.cs" />
+    <Compile Include="Models\PlaneModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\ManagementViewModel.cs" />
-    <Compile Include="Windows\Aircrafts.xaml.cs">
-      <DependentUpon>Aircrafts.xaml</DependentUpon>
+    <Compile Include="Pages\Planes.xaml.cs">
+      <DependentUpon>Planes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Airlines.xaml.cs">
+    <Compile Include="Pages\Airlines.xaml.cs">
       <DependentUpon>Airlines.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Airports.xaml.cs">
+    <Compile Include="Pages\Airports.xaml.cs">
       <DependentUpon>Airports.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Cities.xaml.cs">
+    <Compile Include="Pages\Cities.xaml.cs">
       <DependentUpon>Cities.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Countries.xaml.cs">
+    <Compile Include="Pages\Countries.xaml.cs">
       <DependentUpon>Countries.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Home.xaml.cs">
+    <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Management.xaml.cs">
       <DependentUpon>Management.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Schedule.xaml.cs">
+    <Compile Include="Pages\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -127,27 +129,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Aircrafts.xaml">
+    <Page Include="Pages\Planes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Airlines.xaml">
+    <Page Include="Pages\Airlines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Airports.xaml">
+    <Page Include="Pages\Airports.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Cities.xaml">
+    <Page Include="Pages\Cities.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Countries.xaml">
+    <Page Include="Pages\Countries.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Home.xaml">
+    <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,7 +157,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Schedule.xaml">
+    <Page Include="Pages\Schedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
