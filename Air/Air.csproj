@@ -71,6 +71,7 @@
     <Compile Include="ModelRepository\AirlineRepository.cs" />
     <Compile Include="ModelRepository\AirportRepository.cs" />
     <Compile Include="ModelRepository\CityRepository.cs" />
+    <Compile Include="ModelRepository\CountryRepository.cs" />
     <Compile Include="Models\AirlineModel.cs" />
     <Compile Include="Models\AirportModel.cs" />
     <Compile Include="Models\CityModel.cs" />
