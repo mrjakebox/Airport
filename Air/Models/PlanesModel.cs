@@ -14,7 +14,7 @@ namespace Air.Models
         int _id;
         int _aircompanyID;
         string _airplaneModel;
-        string _planeNumber;
+        string _onboardNumber;
         string _airlineName;
 
         public int PlaneID
@@ -46,7 +46,7 @@ namespace Air.Models
             set
             {
                 _airplaneModel = value;
-                OnPropertyChanged("PlaneModel");
+                OnPropertyChanged("AirplaneModel");
             }
         }
 
@@ -54,13 +54,13 @@ namespace Air.Models
         [RegularExpression(@"^[A-zА-я0-9-]+$", ErrorMessage = "The onboard number must contain only numbers, letters and a hyphen")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "The onboard number must contain from 3 to 50 characters")]
         [Required(ErrorMessage = "There is no onboard number")]
-        public string PlaneNumber
+        public string OnboardNumber
         {
-            get => _planeNumber;
+            get => _onboardNumber;
             set
             {
-                _planeNumber = value;
-                OnPropertyChanged("PlaneNumber");
+                _onboardNumber = value;
+                OnPropertyChanged("OnboardNumber");
             }
         }
 
