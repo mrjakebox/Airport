@@ -9,45 +9,51 @@ using System.Data;
 
 namespace Air.ModelRepository
 {
-    public class CountryRepository : IRepository<CountryModel>
+    public class PlaneRepository : IRepository<PlaneModel>
     {
         private static SqlConnection _connection;
 
         private readonly SqlTransaction _transaction;
 
-        public CountryRepository(SqlTransaction transaction)
+        public PlaneRepository(SqlTransaction transaction)
         {
             _connection = ModelConnection.SqlConnection.Instance.DbConnection as SqlConnection;
             _transaction = transaction;
         }
 
-        public CountryModel CreateModel(SqlDataReader reader)
+        public PlaneModel CreateModel(SqlDataReader reader)
         {
-            return new CountryModel
+            return new PlaneModel
             {
-                CountryID = Convert.ToInt32(reader["CountryID"]),
-                CountryName = reader["CountryName"].ToString()
+                PlaneID = Convert.ToInt32(reader["PlaneID"]),
+                AirlineID = Convert.ToInt32(reader["AirlineID"]),
+                AirplaneModel = reader["AirplaneModel"].ToString(),
+                OnboardNumber = reader["OnboardNumber"].ToString()
             };
         }
 
-        public bool Create(CountryModel item)
+        public bool Create(PlaneModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "CountryCreate";
+            command.CommandText = "PlaneCreate";
             command.Transaction = _transaction;
-            command.Parameters.Add(new SqlParameter("@CountryName", item.CountryName));
-
+            command.Parameters.AddRange(new[]
+            {
+                new SqlParameter("@AirlineID", item.AirlineID),
+                new SqlParameter("@AirplaneModel", item.AirplaneModel),
+                new SqlParameter("@OnboardNumber", item.OnboardNumber)
+            });
             return command.ExecuteNonQuery() == 1;
         }
 
-        public bool Delete(CountryModel item)
+        public bool Delete(PlaneModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "CountryDelete";
+            command.CommandText = "PlaneDelete";
             command.Transaction = _transaction;
-            command.Parameters.Add(new SqlParameter("@CountryID", item.CountryID));
+            command.Parameters.Add(new SqlParameter("@PlaneID", item.PlaneID));
 
             return command.ExecuteNonQuery() == 1;
         }
@@ -57,26 +63,26 @@ namespace Air.ModelRepository
             _connection.Dispose();
         }
 
-        public CountryModel Select(CountryModel item)
+        public PlaneModel Select(PlaneModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "CountrySelect";
+            command.CommandText = "PlaneSelect";
             command.Transaction = _transaction;
-            command.Parameters.Add(new SqlParameter("@CountryID", item.CountryID));
+            command.Parameters.Add(new SqlParameter("@PlaneID", item.PlaneID));
 
             SqlDataReader reader = command.ExecuteReader();
 
             return CreateModel(reader);
         }
 
-        public IEnumerable<CountryModel> SelectList()
+        public IEnumerable<PlaneModel> SelectList()
         {
-            List<CountryModel> countries = new List<CountryModel>();
+            List<PlaneModel> planes = new List<PlaneModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "CountrySelectList";
+            command.CommandText = "PlaneSelectList";
             command.Transaction = _transaction;
 
             SqlDataReader reader = command.ExecuteReader();
@@ -85,24 +91,26 @@ namespace Air.ModelRepository
             {
                 while (reader.Read())
                 {
-                    countries.Add(CreateModel(reader));
+                    planes.Add(CreateModel(reader));
                 }
             }
             reader.Close();
 
-            return countries;
+            return planes;
         }
 
-        public bool Update(CountryModel item)
+        public bool Update(PlaneModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "CountryUpdate";
+            command.CommandText = "PlaneUpdate";
             command.Transaction = _transaction;
             command.Parameters.AddRange(new[]
             {
-                new SqlParameter("@CountryID", item.CountryID),
-                new SqlParameter("@CountryName", item.CountryName)
+                new SqlParameter("@PlaneID", item.PlaneID),
+                new SqlParameter("@AirlineID", item.AirlineID),
+                new SqlParameter("@AirplaneModel", item.AirplaneModel),
+                new SqlParameter("@OnboardNumber", item.OnboardNumber)
             });
             return command.ExecuteNonQuery() == 1;
         }

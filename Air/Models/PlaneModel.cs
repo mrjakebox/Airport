@@ -63,18 +63,5 @@ namespace Air.Models
                 OnPropertyChanged("OnboardNumber");
             }
         }
-
-        [RegularExpression(@"^[A-zА-я]+$", ErrorMessage = "The airline name must contain only letters")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "The airline name must contain from 3 to 50 characters")]
-        [Required(ErrorMessage = "There is no airline name")]
-        public string AirlineName
-        {
-            get => _airlineName;
-            set
-            {
-                _airlineName = value;
-                OnPropertyChanged("AirlineName");
-            }
-        }
     }
 }

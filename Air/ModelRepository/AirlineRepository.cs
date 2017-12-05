@@ -40,7 +40,6 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.AddRange(new[]
             {
-                new SqlParameter("@AirlineID", item.AirlineID),
                 new SqlParameter("@AirlineName", item.AirlineName),
                 new SqlParameter("@AirlinePhone", item.AirlinePhone),
                 new SqlParameter("@AirlineAddress", item.AirlineAddress)
