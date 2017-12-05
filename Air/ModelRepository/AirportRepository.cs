@@ -21,7 +21,7 @@ namespace Air.ModelRepository
             _transaction = transaction;
         }
 
-        public static AirportModel CreateAirportModel(SqlDataReader reader)
+        public static AirportModel CreateModel(SqlDataReader reader)
         {
             return new AirportModel
             {
@@ -41,7 +41,7 @@ namespace Air.ModelRepository
             command.Parameters.AddRange(new[]
             {
                 new SqlParameter("@AirportName", item.AirportName),
-                new SqlParameter("@CityID", item.CityID),
+                new SqlParameter("@CityID", item.CityID)
             });
             return command.ExecuteNonQuery() == 1;
         }
@@ -64,7 +64,7 @@ namespace Air.ModelRepository
 
         public IEnumerable<AirportModel> SelectList()
         {
-            List<AirportModel> airport = new List<AirportModel>();
+            List<AirportModel> airports = new List<AirportModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -77,23 +77,23 @@ namespace Air.ModelRepository
             {
                 while (reader.Read())
                 {
-                    airport.Add(CreateAirportModel(reader));
+                    airports.Add(CreateModel(reader));
                 }
             }
             reader.Close();
 
-            return airport;
+            return airports;
         }
 
-        public IEnumerable<AirportModel> SelectListByCity(int cityID)
+        public IEnumerable<AirportModel> SelectListByCity(AirportModel item)
         {
-            List<AirportModel> airport = new List<AirportModel>();
+            List<AirportModel> airports = new List<AirportModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "AirportSelectListByCity";
             command.Transaction = _transaction;
-            command.Parameters.Add(new SqlParameter("@CityID", cityID));
+            command.Parameters.Add(new SqlParameter("@CityID", item.CityID));
 
             SqlDataReader reader = command.ExecuteReader();
 
@@ -101,25 +101,25 @@ namespace Air.ModelRepository
             {
                 while (reader.Read())
                 {
-                    airport.Add(CreateAirportModel(reader));
+                    airports.Add(CreateModel(reader));
                 }
             }
             reader.Close();
 
-            return airport;
+            return airports;
         }
 
-        public AirportModel Select(int airportID)
+        public AirportModel Select(AirportModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "AirportSelect";
             command.Transaction = _transaction;
-            command.Parameters.Add(new SqlParameter("@AirportID", airportID));
+            command.Parameters.Add(new SqlParameter("@AirportID", item.AirportID));
 
             SqlDataReader reader = command.ExecuteReader();
 
-            return CreateAirportModel(reader);
+            return CreateModel(reader);
         }
 
         public bool Update(AirportModel item)

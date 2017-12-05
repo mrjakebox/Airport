@@ -96,11 +96,9 @@ namespace Air.Models
 
         public string StringGMT
         {
-            get => _stringGMT;
-            set
+            get
             {
-                _stringGMT = value;
-                OnPropertyChanged("StringGMT");
+                return SignGMT + GMT.ToString("HH:mm");
             }
         }
     }

@@ -21,7 +21,7 @@ namespace Air.ModelRepository
             _transaction = transaction;
         }
 
-        public static AirlineModel CreateAirlineModel(SqlDataReader reader)
+        public AirlineModel CreateModel(SqlDataReader reader)
         {
             return new AirlineModel
             {
@@ -66,7 +66,7 @@ namespace Air.ModelRepository
 
         public IEnumerable<AirlineModel> SelectList()
         {
-            List<AirlineModel> airline = new List<AirlineModel>();
+            List<AirlineModel> airlines = new List<AirlineModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -79,25 +79,25 @@ namespace Air.ModelRepository
             {
                 while (reader.Read())
                 {
-                    airline.Add(CreateAirlineModel(reader));
+                    airlines.Add(CreateModel(reader));
                 }
             }
             reader.Close();
 
-            return airline;
+            return airlines;
         }
 
-        public AirlineModel Select(int airlineID)
+        public AirlineModel Select(AirlineModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "AirlineSelect";
             command.Transaction = _transaction;
-            command.Parameters.Add(new SqlParameter("@AirlineID", airlineID));
+            command.Parameters.Add(new SqlParameter("@AirlineID", item.AirlineID));
 
             SqlDataReader reader = command.ExecuteReader();
 
-            return CreateAirlineModel(reader);
+            return CreateModel(reader);
         }
 
         public bool Update(AirlineModel item)
