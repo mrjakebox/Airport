@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Air.ModelRepository
 {
-    class AirlineRepository : IRepository<AirlineModel>
+    public class AirlineRepository : IRepository<AirlineModel>
     {
         private static SqlConnection _connection;
 
@@ -66,11 +66,11 @@ namespace Air.ModelRepository
 
         public IEnumerable<AirlineModel> SelectList()
         {
-            List<AirlineModel> airplane = new List<AirlineModel>();
+            List<AirlineModel> airline = new List<AirlineModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "AirlineSelect";
+            command.CommandText = "AirlineSelectList";
             command.Transaction = _transaction;
 
             SqlDataReader reader = command.ExecuteReader();
@@ -79,12 +79,25 @@ namespace Air.ModelRepository
             {
                 while (reader.Read())
                 {
-                    airplane.Add(CreateAirlineModel(reader));
+                    airline.Add(CreateAirlineModel(reader));
                 }
             }
             reader.Close();
 
-            return airplane;
+            return airline;
+        }
+
+        public AirlineModel Select(int airlineID)
+        {
+            SqlCommand command = _connection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "AirlineSelect";
+            command.Transaction = _transaction;
+            command.Parameters.Add(new SqlParameter("@AirlineID", airlineID));
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            return CreateAirlineModel(reader);
         }
 
         public bool Update(AirlineModel item)

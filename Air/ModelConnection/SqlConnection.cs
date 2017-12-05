@@ -1,7 +1,6 @@
 ﻿using Air.ModelRepository;
 using Air.Models;
 using Air.Properties;
-using Air.Repository;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -33,6 +32,7 @@ namespace Air.ModelConnection
         public void Open()
         {
             DbConnection.Open();
+            new SqlCommand("SET IMPLICIT_TRANSACTIONS ON", (System.Data.SqlClient.SqlConnection)DbConnection).ExecuteNonQuery();
         }
 
         public void Close()
@@ -40,6 +40,8 @@ namespace Air.ModelConnection
             DbConnection.Close();
         }
 
-        public IRepository<AirlineModel> Airlines() => new AirlineRepository();
+        public IRepository<AirlineModel> Airlines(SqlTransaction transaction) => new AirlineRepository(transaction);
+        public IRepository<AirportModel> Airports(SqlTransaction transaction) => new AirportRepository(transaction);
+
     }
 }

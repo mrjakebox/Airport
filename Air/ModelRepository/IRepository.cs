@@ -13,5 +13,6 @@ namespace Air.ModelRepository
         bool Create(T item);
         bool Update(T item);
         bool Delete(T item);
+        T Select(int ID);
     }
 }

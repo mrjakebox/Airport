@@ -1,11 +1,12 @@
 ﻿using Air.Models;
-using Air.Repository;
+using Air.ModelRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Air.ModelConnection
 {
@@ -14,6 +15,8 @@ namespace Air.ModelConnection
         DbConnection DbConnection { get; }
         void Open();
         void Close();
-        IRepository<AirlineModel> Airlines();
+        IRepository<AirlineModel> Airlines(SqlTransaction transaction);
+        IRepository<AirportModel> Airports(SqlTransaction transaction);
+
     }
 }

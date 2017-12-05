@@ -69,6 +69,7 @@
     <Compile Include="ModelConnection\IConnection.cs" />
     <Compile Include="ModelConnection\SqlConnection.cs" />
     <Compile Include="ModelRepository\AirlineRepository.cs" />
+    <Compile Include="ModelRepository\AirportRepository.cs" />
     <Compile Include="Models\AirlineModel.cs" />
     <Compile Include="Models\AirportModel.cs" />
     <Compile Include="Models\CityModel.cs" />

@@ -15,6 +15,8 @@ namespace Air.Models
         private string _cityName;
         private string _countryName;
 
+        public AirportModel() { }
+
         public int AirportID
         {
             get => _airportID;
