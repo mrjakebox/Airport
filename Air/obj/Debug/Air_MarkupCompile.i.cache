@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\courseWork\Air\Air\App.xaml
-2-1920105216
+9-460535644
 
-101206884125
-15-1719790685
-LoginWindow.xaml;Windows\Management.xaml;
+19-546778619
+16470942812
+LoginWindow.xaml;Pages\Aircrafts.xaml;Pages\Airlines.xaml;Pages\Airports.xaml;Pages\Cities.xaml;Pages\Countries.xaml;Pages\Home.xaml;Management.xaml;Pages\Schedule.xaml;
 
-False
+True
 

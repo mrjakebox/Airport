@@ -41,6 +41,7 @@
       <HintPath>..\packages\MaterialDesignThemes.2.3.2-ci1016\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,8 +65,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Windows\Management.xaml.cs">
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModels\ManagementViewModel.cs" />
+    <Compile Include="Windows\Aircrafts.xaml.cs">
+      <DependentUpon>Aircrafts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Airlines.xaml.cs">
+      <DependentUpon>Airlines.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Airports.xaml.cs">
+      <DependentUpon>Airports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Cities.xaml.cs">
+      <DependentUpon>Cities.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Countries.xaml.cs">
+      <DependentUpon>Countries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Management.xaml.cs">
       <DependentUpon>Management.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Schedule.xaml.cs">
+      <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -103,11 +127,38 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Management.xaml">
+    <Page Include="Windows\Aircrafts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Airlines.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Airports.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Cities.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Countries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Management.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Schedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

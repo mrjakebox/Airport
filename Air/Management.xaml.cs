@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Air.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Air.Windows
+namespace Air
 {
     /// <summary>
     /// Логика взаимодействия для Management.xaml
@@ -22,6 +23,7 @@ namespace Air.Windows
         public Management()
         {
             InitializeComponent();
+            DataContext = new ManagementViewModel();
         }
 
         private void MinimizeClick(object sender, RoutedEventArgs e)
@@ -48,5 +50,6 @@ namespace Air.Windows
         }
 
         private void ClearCache() { }
+
     }
 }
