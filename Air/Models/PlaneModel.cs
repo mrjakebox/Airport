@@ -37,7 +37,7 @@ namespace Air.Models
             }
         }
 
-        [RegularExpression(@"^[A-zА-я0-9-]+$", ErrorMessage = "The airplane model must contain only numbers, letters and a hyphen")]
+        [RegularExpression(@"^[A-zА-я0-9-]+$", ErrorMessage = "The airplane model must contain only numbers, letters and hyphens")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "The airplane model must contain from 3 to 20 characters")]
         [Required(ErrorMessage = "There is no airplane model")]
         public string AirplaneModel
@@ -51,7 +51,7 @@ namespace Air.Models
         }
 
 
-        [RegularExpression(@"^[A-zА-я0-9-]+$", ErrorMessage = "The onboard number must contain only numbers, letters and a hyphen")]
+        [RegularExpression(@"^[A-zА-я0-9-]+$", ErrorMessage = "The onboard number must contain only numbers, letters and hyphens")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "The onboard number must contain from 3 to 50 characters")]
         [Required(ErrorMessage = "There is no onboard number")]
         public string OnboardNumber

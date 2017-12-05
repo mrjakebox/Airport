@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Models\AirlineModel.cs" />
     <Compile Include="Models\AirportModel.cs" />
+    <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\PlaneModel.cs" />
     <Compile Include="Models\PropertyObservable.cs" />
     <Compile Include="RelayCommand.cs" />
