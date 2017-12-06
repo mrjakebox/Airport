@@ -12,64 +12,65 @@
      FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         Title="Management" Height="600" Width="800" ResizeMode="NoResize" WindowStyle="None">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2"/>
-        </Grid.RowDefinitions>
-        <Grid Name="DragRectangle" Grid.Column="1">
+
+        <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="2"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.ColumnSpan="5"/>
-
-            <Label FontSize="16"  Opacity="{Binding FrameOpacity}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="5" Content="{Binding CurrentPage.Title}"></Label>
-            <Rectangle Fill="#00000000" Grid.ColumnSpan="5" PreviewMouseLeftButtonDown="DradWindow"/>
-            <Button Grid.Column="1" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Click="LogOutClick" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"  Focusable="False">
-                LOG OUT
-            </Button>
-            <Button Grid.Column="3" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Click="MinimizeClick" Padding="0,6,0,0" materialDesign:ShadowAssist.ShadowDepth="Depth0"  Focusable="False">
-                <materialDesign:PackIcon Kind="WindowMinimize"/>
-            </Button>
-            <Button Grid.Column="4" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Click="CloseClick" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth0" Focusable="False">
-                <materialDesign:PackIcon Kind="WindowClose" />
-            </Button>
-        </Grid>
-
-        <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"/>
-        <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3"/>
-        <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
-        <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="2"/>
             </Grid.RowDefinitions>
-            <ToolBarTray DockPanel.Dock="Top">
-                <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" ToolBarTray.IsLocked="True">
-                    <Button Content="Airlines" Command="{Binding AirlinesClick}"></Button>
-                    <Button Content="Aircrafts" Command="{Binding AircraftsClick}"></Button>
-                    <Separator></Separator>
-                    <Button Content="Airports" Command="{Binding AirportsClick}"/>
-                    <Button Content="Countries" Command="{Binding CountriesClick}"/>
-                    <Button Content="Cities" Command="{Binding CitiesClick}"/>
-                    <Separator></Separator>
-                    <Button Content="Schedule" Command="{Binding ScheduleClick}"/>
-                </ToolBar>
-            </ToolBarTray>
-            <Frame Content="{Binding CurrentPage}" 
+            <Grid Name="DragRectangle" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.ColumnSpan="5"/>
+
+                <Label FontSize="16"  Opacity="{Binding FrameOpacity}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="5" Content="{Binding CurrentPage.Title}"></Label>
+                <Rectangle Fill="#00000000" Grid.ColumnSpan="5" PreviewMouseLeftButtonDown="DradWindow"/>
+                <Button Grid.Column="1" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Click="LogOutClick" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"  Focusable="False">
+                    LOG OUT
+                </Button>
+                <Button Grid.Column="3" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Click="MinimizeClick" Padding="0,6,0,0" materialDesign:ShadowAssist.ShadowDepth="Depth0"  Focusable="False">
+                    <materialDesign:PackIcon Kind="WindowMinimize"/>
+                </Button>
+                <Button Grid.Column="4" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Click="CloseClick" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth0" Focusable="False">
+                    <materialDesign:PackIcon Kind="WindowClose" />
+                </Button>
+            </Grid>
+
+            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"/>
+            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3"/>
+            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ToolBarTray DockPanel.Dock="Top">
+                    <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" ToolBarTray.IsLocked="True">
+                        <Button Content="Airlines" Command="{Binding AirlinesClick}"></Button>
+                        <Button Content="Aircrafts" Command="{Binding AircraftsClick}"></Button>
+                        <Separator></Separator>
+                        <Button Content="Airports" Command="{Binding AirportsClick}"/>
+                        <Button Content="Countries" Command="{Binding CountriesClick}"/>
+                        <Button Content="Cities" Command="{Binding CitiesClick}"/>
+                        <Separator></Separator>
+                        <Button Content="Schedule" Command="{Binding ScheduleClick}"/>
+                    </ToolBar>
+                </ToolBarTray>
+                <Frame Content="{Binding CurrentPage}" 
                    NavigationUIVisibility="Hidden" 
                    Grid.Row="1"
                    Opacity="{Binding FrameOpacity}"/>
+            </Grid>
         </Grid>
-    </Grid>
 </Window>

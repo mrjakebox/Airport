@@ -21,7 +21,7 @@ namespace Air.ModelRepository
             _transaction = transaction;
         }
 
-        public static AirportModel CreateModel(SqlDataReader reader)
+        public AirportModel CreateModel(SqlDataReader reader)
         {
             return new AirportModel
             {
@@ -62,7 +62,7 @@ namespace Air.ModelRepository
             _connection.Dispose();
         }
 
-        public IEnumerable<AirportModel> SelectList()
+        public async Task<IEnumerable<AirportModel>> SelectListAsync()
         {
             List<AirportModel> airports = new List<AirportModel>();
 
@@ -71,11 +71,11 @@ namespace Air.ModelRepository
             command.CommandText = "AirportSelectList";
             command.Transaction = _transaction;
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     airports.Add(CreateModel(reader));
                 }
@@ -122,7 +122,7 @@ namespace Air.ModelRepository
             return CreateModel(reader);
         }
 
-        public bool Update(AirportModel item)
+        public async Task<bool> UpdateAsync(AirportModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -134,7 +134,8 @@ namespace Air.ModelRepository
                 new SqlParameter("@AirportName", item.AirportName),
                 new SqlParameter("@CityID", item.CityID)
             });
-            return command.ExecuteNonQuery() == 1;
+            int x = await command.ExecuteNonQueryAsync();
+            return x == 1;
         }
     }
 }

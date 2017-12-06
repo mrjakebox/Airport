@@ -81,7 +81,7 @@ namespace Air.ModelRepository
             return CreateModel(reader);
         }
 
-        public IEnumerable<CityModel> SelectList()
+        public async Task<IEnumerable<CityModel>> SelectListAsync()
         {
             List<CityModel> cities = new List<CityModel>();
 
@@ -90,11 +90,11 @@ namespace Air.ModelRepository
             command.CommandText = "CitySelectList";
             command.Transaction = _transaction;
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     cities.Add(CreateModel(reader));
                 }
@@ -128,7 +128,7 @@ namespace Air.ModelRepository
             return cities;
         }
 
-        public bool Update(CityModel item)
+        public async Task<bool> UpdateAsync(CityModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -143,7 +143,8 @@ namespace Air.ModelRepository
                 new SqlParameter("@GMT", item.GMT),
                 new SqlParameter("@SignGMT", item.SignGMT)
             });
-            return command.ExecuteNonQuery() == 1;
+            int x = await command.ExecuteNonQueryAsync();
+            return x == 1;
         }
     }
 }

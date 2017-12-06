@@ -1,5 +1,4 @@
-﻿using Air.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Air.Windows
+namespace Air.ViewModels
 {
     /// <summary>
-    /// Логика взаимодействия для Airlines.xaml
+    /// Логика взаимодействия для ProgressDialog.xaml
     /// </summary>
-    public partial class Airlines : Page
+    public partial class ProgressDialog : UserControl
     {
-        public Airlines()
+        public ProgressDialog()
         {
             InitializeComponent();
-            DataContext = new AirlineViewModel();
-            
         }
     }
 }

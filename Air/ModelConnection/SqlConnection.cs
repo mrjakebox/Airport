@@ -29,10 +29,10 @@ namespace Air.ModelConnection
             DbConnection = new System.Data.SqlClient.SqlConnection(stringConnection.ToString());
         }
 
-        public void Open()
+        public async Task OpenAsync()
         {
-            DbConnection.Open();
-            new SqlCommand("SET IMPLICIT_TRANSACTIONS ON", (System.Data.SqlClient.SqlConnection)DbConnection).ExecuteNonQuery();
+            await DbConnection.OpenAsync();
+            await new SqlCommand("SET IMPLICIT_TRANSACTIONS ON", (System.Data.SqlClient.SqlConnection)DbConnection).ExecuteNonQueryAsync();
         }
 
         public void Close()
@@ -42,6 +42,9 @@ namespace Air.ModelConnection
 
         public IRepository<AirlineModel> Airlines(SqlTransaction transaction) => new AirlineRepository(transaction);
         public IRepository<AirportModel> Airports(SqlTransaction transaction) => new AirportRepository(transaction);
-
+        public IRepository<CityModel> Cities(SqlTransaction transaction) => new CityRepository(transaction);
+        public IRepository<CountryModel> Countries(SqlTransaction transaction) => new CountryRepository(transaction);
+        public IRepository<FlightModel> Flights(SqlTransaction transaction) => new FlightRepository(transaction);
+        public IRepository<PlaneModel> Planes(SqlTransaction transaction) => new PlaneRepository(transaction);
     }
 }

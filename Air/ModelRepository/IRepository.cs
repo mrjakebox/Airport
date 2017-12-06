@@ -10,9 +10,9 @@ namespace Air.ModelRepository
     public interface IRepository<T> : IDisposable
         where T : class
     {
-        IEnumerable<T> SelectList();
+        Task<IEnumerable<T>> SelectListAsync();
         bool Create(T item);
-        bool Update(T item);
+        Task<bool> UpdateAsync(T item);
         bool Delete(T item);
         T Select(T item);
         T CreateModel(SqlDataReader reader);

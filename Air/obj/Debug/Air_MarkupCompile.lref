@@ -1,12 +1,14 @@
 ﻿
 FD:\courseWork\Air\Air\App.xaml;;
 FD:\courseWork\Air\Air\LoginWindow.xaml;;
-FD:\courseWork\Air\Air\Windows\Aircrafts.xaml;;
-FD:\courseWork\Air\Air\Windows\Airlines.xaml;;
-FD:\courseWork\Air\Air\Windows\Airports.xaml;;
-FD:\courseWork\Air\Air\Windows\Cities.xaml;;
-FD:\courseWork\Air\Air\Windows\Countries.xaml;;
-FD:\courseWork\Air\Air\Windows\Home.xaml;;
+FD:\courseWork\Air\Air\Pages\Edit\AirlinesEdit.xaml;;
+FD:\courseWork\Air\Air\Pages\Planes.xaml;;
+FD:\courseWork\Air\Air\Pages\Airlines.xaml;;
+FD:\courseWork\Air\Air\Pages\Airports.xaml;;
+FD:\courseWork\Air\Air\Pages\Cities.xaml;;
+FD:\courseWork\Air\Air\Pages\Countries.xaml;;
+FD:\courseWork\Air\Air\Pages\Home.xaml;;
 FD:\courseWork\Air\Air\Management.xaml;;
-FD:\courseWork\Air\Air\Windows\Schedule.xaml;;
+FD:\courseWork\Air\Air\Pages\Schedule.xaml;;
+FD:\courseWork\Air\Air\ViewModels\ProgressDialog.xaml;;
 

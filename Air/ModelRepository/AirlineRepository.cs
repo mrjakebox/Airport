@@ -63,7 +63,7 @@ namespace Air.ModelRepository
             _connection.Dispose();
         }
 
-        public IEnumerable<AirlineModel> SelectList()
+        public async Task<IEnumerable<AirlineModel>> SelectListAsync()
         {
             List<AirlineModel> airlines = new List<AirlineModel>();
 
@@ -72,11 +72,11 @@ namespace Air.ModelRepository
             command.CommandText = "AirlineSelectList";
             command.Transaction = _transaction;
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     airlines.Add(CreateModel(reader));
                 }
@@ -99,7 +99,7 @@ namespace Air.ModelRepository
             return CreateModel(reader);
         }
 
-        public bool Update(AirlineModel item)
+        public async Task<bool> UpdateAsync(AirlineModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -112,7 +112,8 @@ namespace Air.ModelRepository
                 new SqlParameter("@AirlinePhone", item.AirlinePhone),
                 new SqlParameter("@AirlineAddress", item.AirlineAddress)
             });
-            return command.ExecuteNonQuery() == 1;
+            int x = await command.ExecuteNonQueryAsync();
+            return x == 1;
         }
     }
 }

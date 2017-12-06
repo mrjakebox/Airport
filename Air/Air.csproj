@@ -62,10 +62,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AnotherCommandImplementation.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MainController.cs" />
     <Compile Include="ModelConnection\IConnection.cs" />
     <Compile Include="ModelConnection\SqlConnection.cs" />
     <Compile Include="ModelRepository\AirlineRepository.cs" />
@@ -81,8 +83,15 @@
     <Compile Include="Models\PlaneModel.cs" />
     <Compile Include="Models\PropertyObservable.cs" />
     <Compile Include="Models\FlightModel.cs" />
+    <Compile Include="Pages\Edit\AirlinesEdit.xaml.cs">
+      <DependentUpon>AirlinesEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ModelRepository\IRepository.cs" />
+    <Compile Include="Validation\AddressValidationRule.cs" />
+    <Compile Include="Validation\NameValidationRule.cs" />
+    <Compile Include="Validation\PhoneValidationRule.cs" />
+    <Compile Include="ViewModels\AirlineViewModel.cs" />
     <Compile Include="ViewModels\ManagementViewModel.cs" />
     <Compile Include="Pages\Planes.xaml.cs">
       <DependentUpon>Planes.xaml</DependentUpon>
@@ -107,6 +116,9 @@
     </Compile>
     <Compile Include="Pages\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ProgressDialog.xaml.cs">
+      <DependentUpon>ProgressDialog.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +156,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Edit\AirlinesEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Planes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Schedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\ProgressDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

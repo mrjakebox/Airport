@@ -8,15 +8,44 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="AIRLINES">
+    <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}"
+                                           DialogContent="{Binding DialogContent}"
+                                           CloseOnClickAway="True">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="68*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="77*"/>
+                <ColumnDefinition Width="95*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="46*"/>
+                <RowDefinition Height="157*"/>
+                <RowDefinition Height="97*"/>
+            </Grid.RowDefinitions>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="46*"/>
-            <RowDefinition Height="157*"/>
-            <RowDefinition Height="97*"/>
-        </Grid.RowDefinitions>
-        <TextBlock>AIRLINES</TextBlock>
-        <DataGrid CanUserSortColumns="True" CanUserAddRows="False" AutoGenerateColumns="False"
-                      materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" Grid.Row="1"/>
-    </Grid>
+            <DataGrid Name="airlines"
+                  CanUserSortColumns="True"
+                  ItemsSource="{Binding Airlines}"
+                  SelectedItem="{Binding SelectedAirline}"
+                  CanUserAddRows="False"
+                  AutoGenerateColumns="False"
+                  materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                  Grid.Row="1" Grid.ColumnSpan="4">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Name" Binding="{Binding AirlineName}"/>
+                    <DataGridTextColumn Width="*" Header="Phone" Binding="{Binding AirlinePhone}"/>
+                    <DataGridTextColumn Width="*" Header="Address" Binding="{Binding AirlineAddress}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Grid.Row="2" Content="REFRESH" Command="{Binding RefreshCommand}"/>
+            <Button Grid.Row="2" Grid.Column="1" Content="UPDATE" Command="{Binding UpdateCommand}"/>
+            <Button Grid.Row="2" Grid.Column="2"/>
+            <Button Grid.Row="2" Grid.Column="3"/>
+            <materialDesign:Snackbar MessageQueue="{Binding Message}" IsActive="{Binding IsSnackbarActive}"
+                                             x:Name="SnackbarThree" Grid.ColumnSpan="4"  Grid.Row="2" />
+        </Grid>
+    </materialDesign:DialogHost>
+
 </Page>

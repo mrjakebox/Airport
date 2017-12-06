@@ -70,7 +70,7 @@ namespace Air.ModelRepository
             return CreateModel(reader);
         }
 
-        public IEnumerable<CountryModel> SelectList()
+        public async Task<IEnumerable<CountryModel>> SelectListAsync()
         {
             List<CountryModel> countries = new List<CountryModel>();
 
@@ -79,11 +79,11 @@ namespace Air.ModelRepository
             command.CommandText = "CountrySelectList";
             command.Transaction = _transaction;
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     countries.Add(CreateModel(reader));
                 }
@@ -93,7 +93,7 @@ namespace Air.ModelRepository
             return countries;
         }
 
-        public bool Update(CountryModel item)
+        public async Task<bool> UpdateAsync(CountryModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -104,7 +104,8 @@ namespace Air.ModelRepository
                 new SqlParameter("@CountryID", item.CountryID),
                 new SqlParameter("@CountryName", item.CountryName)
             });
-            return command.ExecuteNonQuery() == 1;
+            int x = await command.ExecuteNonQueryAsync();
+            return x == 1;
         }
     }
 }
