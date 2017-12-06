@@ -34,8 +34,10 @@
                 </Grid.ColumnDefinitions>
                 <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.ColumnSpan="5"/>
 
-                <Label FontSize="16"  Opacity="{Binding FrameOpacity}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="5" Content="{Binding CurrentPage.Title}"></Label>
-                <Rectangle Fill="#00000000" Grid.ColumnSpan="5" PreviewMouseLeftButtonDown="DradWindow"/>
+            <TextBlock Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Grid.ColumnSpan="5" Margin="10,2" FontSize="16">
+                  <materialDesign:PackIcon Kind="Airplane" Height="24" Width="24" Margin="-2"/>irport Management
+            </TextBlock>
+            <Rectangle Fill="#00000000" Grid.ColumnSpan="5" PreviewMouseLeftButtonDown="DradWindow"/>
                 <Button Grid.Column="1" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Click="LogOutClick" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"  Focusable="False">
                     LOG OUT
                 </Button>
@@ -52,19 +54,17 @@
             <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="32"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ToolBarTray DockPanel.Dock="Top">
+                <ToolBarTray DockPanel.Dock="Top" Height="32">
                     <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" ToolBarTray.IsLocked="True">
-                        <Button Content="Airlines" Command="{Binding AirlinesClick}"></Button>
-                        <Button Content="Aircrafts" Command="{Binding AircraftsClick}"></Button>
-                        <Separator></Separator>
-                        <Button Content="Airports" Command="{Binding AirportsClick}"/>
-                        <Button Content="Countries" Command="{Binding CountriesClick}"/>
-                        <Button Content="Cities" Command="{Binding CitiesClick}"/>
-                        <Separator></Separator>
-                        <Button Content="Schedule" Command="{Binding ScheduleClick}"/>
+                    <Button Height="30" Padding="40,5" Content="Airlines" Command="{Binding AirlinesClick}"></Button>
+                    <Button Height="30" Padding="40,5" Content="Aircrafts" Command="{Binding AircraftsClick}"></Button>
+                    <Button Height="30" Padding="40,5" Content="Airports" Command="{Binding AirportsClick}"/>
+                    <Button Height="30" Padding="40,5" Content="Countries" Command="{Binding CountriesClick}"/>
+                    <Button Height="30" Padding="40,5" Content="Cities" Command="{Binding CitiesClick}"/>
+                    <Button Height="30" Padding="40,5" Content="Schedule" Command="{Binding ScheduleClick}"/>
                     </ToolBar>
                 </ToolBarTray>
                 <Frame Content="{Binding CurrentPage}" 

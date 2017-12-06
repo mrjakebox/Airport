@@ -6,24 +6,55 @@
              xmlns:local="clr-namespace:Air.Pages.Edit"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:validation="clr-namespace:Air.Validation"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d"   TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontSize="16"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+             d:DesignHeight="330" d:DesignWidth="600">
     <Grid>
-        <Grid x:Name="grid" Margin="16">
+        <Grid Margin="16,0,16,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="101*" />
-
-                <RowDefinition Height="33*" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            <Grid Name="Data">
+            <Label Name="Title" Background="{DynamicResource PrimaryHueMidBrush}"  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
+            <wpf:Card Margin="10,10,10,0" Padding="16" Name="OldData" Grid.Row="1" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="55"/>
+                        <RowDefinition Height="55"/>
+                    </Grid.RowDefinitions>
+                    <Label Background="{DynamicResource PrimaryHueMidBrush}"  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">OLD DATA</Label>
+                    <TextBlock FontWeight="DemiBold"  HorizontalAlignment="Left" Text="Airline name:" Grid.Row="1" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock HorizontalAlignment="Right" Text="{Binding AirlineName}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
+                    <TextBlock FontWeight="DemiBold" HorizontalAlignment="Left" Text="Airline phone:" Grid.Row="2" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock HorizontalAlignment="Right" Text="{Binding AirlinePhone}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
+                    <TextBlock FontWeight="DemiBold" HorizontalAlignment="Left" Text="Airline address:" Grid.Row="3" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock HorizontalAlignment="Right" Text="{Binding AirlineAddress}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
+                </Grid>
+            </wpf:Card>
+            <Grid Name="Data" Margin="36,26" Grid.Column="1" MinWidth="200" Grid.Row="1" MaxWidth="400">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="16*"/>
-                    <RowDefinition Height="19*"/>
-                    <RowDefinition Height="24*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="55"/>
                 </Grid.RowDefinitions>
+                <Label Background="{DynamicResource PrimaryHueMidBrush}"  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">NEW DATA</Label>
                 <TextBox
-				    x:Name="AirlineName" FontSize="18"
-				    wpf:HintAssist.Hint="Name" Style="{DynamicResource MaterialDesignFloatingHintTextBox}">
+				    x:Name="AirlineName"  MaxLength="50"
+				    wpf:HintAssist.Hint="Name" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" Grid.Row="1">
                     <TextBox.Text>
                         <Binding Path="AirlineName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -33,7 +64,7 @@
                     </TextBox.Text>
                 </TextBox>
                 <TextBox
-				    x:Name="AirlinePhone" Grid.Row="1" FontSize="18"
+				    x:Name="AirlinePhone" Grid.Row="2"  MaxLength="12"
 				    wpf:HintAssist.Hint="Phone" Style="{DynamicResource MaterialDesignFloatingHintTextBox}">
                     <TextBox.Text>
                         <Binding Path="AirlinePhone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
@@ -43,11 +74,11 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox
-				    x:Name="AirlineAddress" Grid.Row="2" FontSize="18"
-				    wpf:HintAssist.Hint="Address" Style="{DynamicResource MaterialDesignFloatingHintTextBox}">
+                <TextBox 
+				    x:Name="AirlineAddress" Grid.Row="3"
+				    wpf:HintAssist.Hint="Address" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" MaxLength="50">
                     <TextBox.Text>
-                        <Binding Path="AirlinePhone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="AirlineAddress" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validation:AddressValidationRule ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
@@ -55,11 +86,10 @@
                     </TextBox.Text>
                 </TextBox>
             </Grid>
-            <StackPanel Orientation="Horizontal" Grid.Row="1"
-                    Margin="0 16 0 0">
-                <Button IsDefault="True" 
-                    Command="{Binding AcceptDialogCommand}" CommandParameter="{Binding DataContext, ElementName=Data}" Content="ACCEPT">
-                    
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Grid.Column="1">
+                <Button IsDefault="True" Command="{Binding AcceptDialogCommand}" 
+                        CommandParameter="{Binding DataContext, ElementName=Data}" 
+                        Content="ACCEPT">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                             <Setter Property="IsEnabled" Value="False" />
@@ -78,9 +108,7 @@
                 </Button>
 
                 <Button IsCancel="True" Margin="8 0 0 0" Style="{DynamicResource MaterialDesignFlatButton}"
-                    Command="{Binding CancelDialogCommand}">
-                    CANCEL
-                </Button>
+                    Command="{Binding CancelDialogCommand}" Content="CANCEL"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -44,6 +44,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -91,6 +93,9 @@
     <Compile Include="Validation\AddressValidationRule.cs" />
     <Compile Include="Validation\NameValidationRule.cs" />
     <Compile Include="Validation\PhoneValidationRule.cs" />
+    <Compile Include="ViewModels\AcceptOrCancelDialog.xaml.cs">
+      <DependentUpon>AcceptOrCancelDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AirlineViewModel.cs" />
     <Compile Include="ViewModels\ManagementViewModel.cs" />
     <Compile Include="Pages\Planes.xaml.cs">
@@ -189,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Schedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModels\AcceptOrCancelDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

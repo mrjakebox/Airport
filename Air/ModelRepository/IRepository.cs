@@ -11,10 +11,10 @@ namespace Air.ModelRepository
         where T : class
     {
         Task<IEnumerable<T>> SelectListAsync();
-        bool Create(T item);
+        Task<bool> CreateAsync(T item);
         Task<bool> UpdateAsync(T item);
-        bool Delete(T item);
-        T Select(T item);
+        Task<bool> DeleteAsync(T item);
+        Task<T> SelectAsync(T item);
         T CreateModel(SqlDataReader reader);
     }
 }

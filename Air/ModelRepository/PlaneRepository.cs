@@ -32,7 +32,7 @@ namespace Air.ModelRepository
             };
         }
 
-        public bool Create(PlaneModel item)
+        public async Task<bool> CreateAsync(PlaneModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -44,10 +44,10 @@ namespace Air.ModelRepository
                 new SqlParameter("@AirplaneModel", item.AirplaneModel),
                 new SqlParameter("@OnboardNumber", item.OnboardNumber)
             });
-            return command.ExecuteNonQuery() == 1;
+            return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
 
-        public bool Delete(PlaneModel item)
+        public async Task<bool> DeleteAsync(PlaneModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -55,7 +55,7 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.Add(new SqlParameter("@PlaneID", item.PlaneID));
 
-            return command.ExecuteNonQuery() == 1;
+            return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
 
         public void Dispose()
@@ -63,7 +63,7 @@ namespace Air.ModelRepository
             _connection.Dispose();
         }
 
-        public PlaneModel Select(PlaneModel item)
+        public async Task<PlaneModel> SelectAsync(PlaneModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -71,7 +71,7 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.Add(new SqlParameter("@PlaneID", item.PlaneID));
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             return CreateModel(reader);
         }

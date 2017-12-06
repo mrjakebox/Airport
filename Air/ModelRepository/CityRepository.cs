@@ -35,7 +35,7 @@ namespace Air.ModelRepository
             };
         }
 
-        public bool Create(CityModel item)
+        public async Task<bool> CreateAsync(CityModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -49,10 +49,10 @@ namespace Air.ModelRepository
                 new SqlParameter("@GMT", item.GMT),
                 new SqlParameter("@SignGMT", item.SignGMT)
             });
-            return command.ExecuteNonQuery() == 1;
+            return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
 
-        public bool Delete(CityModel item)
+        public async Task<bool> DeleteAsync(CityModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -60,7 +60,7 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.Add(new SqlParameter("@CityID", item.CityID));
 
-            return command.ExecuteNonQuery() == 1;
+            return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
 
         public void Dispose()
@@ -68,7 +68,7 @@ namespace Air.ModelRepository
             _connection.Dispose();
         }
 
-        public CityModel Select(CityModel item)
+        public async Task<CityModel> SelectAsync(CityModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -76,7 +76,7 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.Add(new SqlParameter("@CityID", item.CityID));
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             return CreateModel(reader);
         }

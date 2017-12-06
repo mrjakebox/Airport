@@ -25,9 +25,22 @@ namespace Air.Pages.Edit
         {
             InitializeComponent();
             Airline = airline;
-            Data.DataContext = Airline;      
+            AirlineOld = airline;
+            Data.DataContext = Airline;  
+            OldData.DataContext = AirlineOld;
+                Title.Content = "UPDATE OF AIRLINE DATA";
         }
 
+        public AirlinesEdit()
+        {
+            InitializeComponent();
+            Airline = new AirlineModel();
+            Data.DataContext = Airline;
+                Title.Content = "CREATION OF AIRLINE DATA";
+                OldData.Visibility = Visibility.Collapsed;
+        }
+
+        public AirlineModel AirlineOld { get; set; }
         private AirlineModel _airline;
         public AirlineModel Airline
         {

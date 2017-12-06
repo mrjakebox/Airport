@@ -30,7 +30,7 @@ namespace Air.ModelRepository
             };
         }
 
-        public bool Create(CountryModel item)
+        public async Task<bool> CreateAsync(CountryModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -38,10 +38,10 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.Add(new SqlParameter("@CountryName", item.CountryName));
 
-            return command.ExecuteNonQuery() == 1;
+            return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
 
-        public bool Delete(CountryModel item)
+        public async Task<bool> DeleteAsync(CountryModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -49,7 +49,7 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.Add(new SqlParameter("@CountryID", item.CountryID));
 
-            return command.ExecuteNonQuery() == 1;
+            return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
 
         public void Dispose()
@@ -57,7 +57,7 @@ namespace Air.ModelRepository
             _connection.Dispose();
         }
 
-        public CountryModel Select(CountryModel item)
+        public async Task<CountryModel> SelectAsync(CountryModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -65,7 +65,7 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.Add(new SqlParameter("@CountryID", item.CountryID));
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             return CreateModel(reader);
         }

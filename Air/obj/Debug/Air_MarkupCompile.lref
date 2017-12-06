@@ -1,4 +1,4 @@
-﻿
+﻿D:\courseWork\Air\Air\obj\Debug\GeneratedInternalTypeHelper.g.cs
 FD:\courseWork\Air\Air\App.xaml;;
 FD:\courseWork\Air\Air\LoginWindow.xaml;;
 FD:\courseWork\Air\Air\Pages\Edit\AirlinesEdit.xaml;;
@@ -10,5 +10,6 @@ FD:\courseWork\Air\Air\Pages\Countries.xaml;;
 FD:\courseWork\Air\Air\Pages\Home.xaml;;
 FD:\courseWork\Air\Air\Management.xaml;;
 FD:\courseWork\Air\Air\Pages\Schedule.xaml;;
+FD:\courseWork\Air\Air\ViewModels\AcceptOrCancelDialog.xaml;;
 FD:\courseWork\Air\Air\ViewModels\ProgressDialog.xaml;;
 

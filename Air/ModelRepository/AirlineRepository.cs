@@ -32,7 +32,7 @@ namespace Air.ModelRepository
             };
         }
 
-        public bool Create(AirlineModel item)
+        public async Task<bool> CreateAsync(AirlineModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -44,10 +44,10 @@ namespace Air.ModelRepository
                 new SqlParameter("@AirlinePhone", item.AirlinePhone),
                 new SqlParameter("@AirlineAddress", item.AirlineAddress)
             });
-            return command.ExecuteNonQuery() == 1;
+            return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
 
-        public bool Delete(AirlineModel item)
+        public async Task<bool> DeleteAsync(AirlineModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -55,7 +55,7 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.Add(new SqlParameter("@AirlineID", item.AirlineID));
 
-            return command.ExecuteNonQuery() == 1;
+            return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
 
         public void Dispose()
@@ -86,7 +86,7 @@ namespace Air.ModelRepository
             return airlines;
         }
 
-        public AirlineModel Select(AirlineModel item)
+        public async Task<AirlineModel> SelectAsync(AirlineModel item)
         {
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -94,7 +94,7 @@ namespace Air.ModelRepository
             command.Transaction = _transaction;
             command.Parameters.Add(new SqlParameter("@AirlineID", item.AirlineID));
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             return CreateModel(reader);
         }
@@ -112,8 +112,7 @@ namespace Air.ModelRepository
                 new SqlParameter("@AirlinePhone", item.AirlinePhone),
                 new SqlParameter("@AirlineAddress", item.AirlineAddress)
             });
-            int x = await command.ExecuteNonQueryAsync();
-            return x == 1;
+            return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
     }
 }
