@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace Air.ModelRepository
 {
@@ -34,7 +35,7 @@ namespace Air.ModelRepository
                 AirportName = reader["AirportName"].ToString(),
                 CityName = reader["CityName"].ToString(),
                 CountryName = reader["CountryName"].ToString(),
-                FlightType = reader["FlightType"].ToString(),
+                FlightType = Convert.ToBoolean(reader["FlightType"]),
                 DateTimeStart = Convert.ToDateTime(reader["DateTimeStart"]),
                 Duration = reader["Duration"].ToString(),
                 DateTimeArrival = Convert.ToDateTime(reader["DateTimeArrival"]),
@@ -118,9 +119,9 @@ namespace Air.ModelRepository
             return CreateModel(reader);
         }
 
-        public async Task<IEnumerable<FlightModel>> SelectListAsync()
+        public async Task<ObservableCollection<FlightModel>> SelectListAsync()
         {
-            List<FlightModel> flights = new List<FlightModel>();
+            ObservableCollection<FlightModel> flights = new ObservableCollection<FlightModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -141,9 +142,9 @@ namespace Air.ModelRepository
             return flights;
         }
 
-        public IEnumerable<FlightModel> SelectList(DateTime endDate)
+        public ObservableCollection<FlightModel> SelectList(DateTime endDate)
         {
-            List<FlightModel> flights = new List<FlightModel>();
+            ObservableCollection<FlightModel> flights = new ObservableCollection<FlightModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -450,6 +451,11 @@ namespace Air.ModelRepository
             });
             int x = await command.ExecuteNonQueryAsync();
             return x == 1;
+        }
+
+        public Task<ObservableCollection<FlightModel>> SelectListFormatAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Air.ModelConnection
         {
             SqlConnectionStringBuilder stringConnection = new SqlConnectionStringBuilder();
             stringConnection.DataSource = @"(localdb)\MSSQLLocalDB";
-            stringConnection.InitialCatalog = "Airport";
+            stringConnection.InitialCatalog = "Course";
             stringConnection.UserID = Settings.Default.Username;
             stringConnection.Password = Settings.Default.Password;
 

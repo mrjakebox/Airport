@@ -1,11 +1,11 @@
-﻿<UserControl x:Name="userControl" x:Class="Air.Pages.Edit.AirlinesEdit"
+﻿<UserControl x:Class="Air.Pages.Edit.CountriesEdit"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Air.Pages.Edit"
-             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:validation="clr-namespace:Air.Validation"
+             xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"   TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontSize="16"
      Background="{DynamicResource MaterialDesignPaper}"
@@ -32,55 +32,25 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="55"/>
-                        <RowDefinition Height="55"/>
-                        <RowDefinition Height="55"/>
                     </Grid.RowDefinitions>
                     <Label Background="{DynamicResource PrimaryHueMidBrush}"  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">OLD DATA</Label>
-                    <TextBlock FontWeight="DemiBold"  HorizontalAlignment="Left" Text="Airline name:" Grid.Row="1" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBlock HorizontalAlignment="Right" Text="{Binding AirlineName}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-                    <TextBlock FontWeight="DemiBold" HorizontalAlignment="Left" Text="Airline phone:" Grid.Row="2" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBlock HorizontalAlignment="Right" Text="{Binding Phone}" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
-                    <TextBlock FontWeight="DemiBold" HorizontalAlignment="Left" Text="Airline address:" Grid.Row="3" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <TextBlock HorizontalAlignment="Right" Text="{Binding Address}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
+                    <TextBlock FontWeight="DemiBold"  HorizontalAlignment="Left" Text="Country name:" Grid.Row="1" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock HorizontalAlignment="Right" Text="{Binding CountryName}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
                 </Grid>
             </wpf:Card>
             <Grid Name="Data" Margin="36,26" Grid.Column="1" MinWidth="200" Grid.Row="1" MaxWidth="400">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="55"/>
-                    <RowDefinition Height="55"/>
-                    <RowDefinition Height="55"/>
                 </Grid.RowDefinitions>
                 <Label Background="{DynamicResource PrimaryHueMidBrush}"  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">NEW DATA</Label>
                 <TextBox
-				    x:Name="AirlineName"  MaxLength="50"
+				    x:Name="CountryName"  MaxLength="50"
 				    wpf:HintAssist.Hint="Name" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" Grid.Row="1">
                     <TextBox.Text>
-                        <Binding Path="AirlineName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="CountryName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validation:NameValidationRule ValidatesOnTargetUpdated="True" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-                <TextBox
-				    x:Name="AirlinePhone" Grid.Row="2"  MaxLength="20"
-				    wpf:HintAssist.Hint="Phone" Style="{DynamicResource MaterialDesignFloatingHintTextBox}">
-                    <TextBox.Text>
-                        <Binding Path="Phone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validation:PhoneValidationRule ValidatesOnTargetUpdated="True" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-                <TextBox 
-				    x:Name="AirlineAddress" Grid.Row="3"
-				    wpf:HintAssist.Hint="Address" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" MaxLength="50">
-                    <TextBox.Text>
-                        <Binding Path="Address" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validation:AddressValidationRule ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -96,9 +66,7 @@
                             <Style.Triggers>
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=(Validation.Errors).Count, ElementName=AirlineName}" Value="0" />
-                                        <Condition Binding="{Binding Path=(Validation.Errors).Count, ElementName=AirlinePhone}" Value="0" />
-                                        <Condition Binding="{Binding Path=(Validation.Errors).Count, ElementName=AirlineAddress}" Value="0" />
+                                        <Condition Binding="{Binding Path=(Validation.Errors).Count, ElementName=CountryName}" Value="0" />
                                     </MultiDataTrigger.Conditions>
                                     <Setter Property="IsEnabled" Value="True" />
                                 </MultiDataTrigger>

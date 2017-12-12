@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Air.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Air.Windows
         public Aircrafts()
         {
             InitializeComponent();
+            DataContext = new PlaneViewModel();
         }
     }
 }

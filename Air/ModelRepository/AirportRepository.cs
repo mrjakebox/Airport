@@ -1,6 +1,7 @@
 ﻿using Air.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -62,9 +63,9 @@ namespace Air.ModelRepository
             _connection.Dispose();
         }
 
-        public async Task<IEnumerable<AirportModel>> SelectListAsync()
+        public async Task<ObservableCollection<AirportModel>> SelectListAsync()
         {
-            List<AirportModel> airports = new List<AirportModel>();
+            ObservableCollection<AirportModel> airports = new ObservableCollection<AirportModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -136,6 +137,11 @@ namespace Air.ModelRepository
             });
             int x = await command.ExecuteNonQueryAsync();
             return x == 1;
+        }
+
+        public Task<ObservableCollection<AirportModel>> SelectListFormatAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

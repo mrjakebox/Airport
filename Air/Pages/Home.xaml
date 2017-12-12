@@ -8,7 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MANAGEMENT">
 
-    <Grid>
-        <TextBlock>HOME</TextBlock>
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">ЗДРАВСТВУЙТЕ, {NAME}</TextBlock>
     </Grid>
 </Page>

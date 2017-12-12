@@ -25,7 +25,6 @@ namespace Air.Windows
         {
             InitializeComponent();
             DataContext = new AirlineViewModel();
-            
         }
     }
 }

@@ -11,8 +11,8 @@ namespace Air.Models
     {
         private int _airlineID;
         private string _airlineName;
-        private string _airlinePhone;
-        private string _airlineAddress;
+        private string _phone;
+        private string _address;
 
         public AirlineModel() { }
 
@@ -26,9 +26,6 @@ namespace Air.Models
             }
         }
 
-        [RegularExpression(@"^[A-zА-я]+$", ErrorMessage = "The airline name must contain only letters")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "The airline name must contain from 3 to 50 characters")]
-        [Required(ErrorMessage = "There is no airline name")]
         public string AirlineName
         {
             get => _airlineName;
@@ -39,29 +36,23 @@ namespace Air.Models
             }
         }
 
-        [RegularExpression(@"^[0-9]+$", ErrorMessage = "The airline phone number must contain only numbers")]
-        [StringLength(12, MinimumLength = 12, ErrorMessage = "The airline phone number must contain 12 characters")]
-        [Required(ErrorMessage = "There is no airline phone number")]
-        public string AirlinePhone
+        public string Phone
         {
-            get => _airlinePhone;
+            get => _phone;
             set
             {
-                _airlinePhone = value;
-                OnPropertyChanged("AirlinePhone");
+                _phone = value;
+                OnPropertyChanged("Phone");
             }
         }
 
-        [RegularExpression(@"^[A-zА-я0-9]+\s*$", ErrorMessage = "The airline address must contain only letters and numbers")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "The airline address can not contain more than 100 characters")]
-        [Required(ErrorMessage = "There is no airline address")]
-        public string AirlineAddress
+        public string Address
         {
-            get => _airlineAddress;
+            get => _address;
             set
             {
-                _airlineAddress = value;
-                OnPropertyChanged("AirlineAddress");
+                _address = value;
+                OnPropertyChanged("Address");
             }
         }
     }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace Air.ModelRepository
 {
@@ -70,9 +71,9 @@ namespace Air.ModelRepository
             return CreateModel(reader);
         }
 
-        public async Task<IEnumerable<CountryModel>> SelectListAsync()
+        public async Task<ObservableCollection<CountryModel>> SelectListAsync()
         {
-            List<CountryModel> countries = new List<CountryModel>();
+            ObservableCollection<CountryModel> countries = new ObservableCollection<CountryModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -106,6 +107,11 @@ namespace Air.ModelRepository
             });
             int x = await command.ExecuteNonQueryAsync();
             return x == 1;
+        }
+
+        public Task<ObservableCollection<CountryModel>> SelectListFormatAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

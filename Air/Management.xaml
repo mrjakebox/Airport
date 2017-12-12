@@ -13,64 +13,72 @@
         WindowStartupLocation="CenterScreen"
         Title="Management" Height="600" Width="800" ResizeMode="NoResize" WindowStyle="None">
 
-        <Grid>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2"/>
+        </Grid.RowDefinitions>
+        <Grid Name="DragRectangle" Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="25"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="2"/>
-            </Grid.RowDefinitions>
-            <Grid Name="DragRectangle" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="90"/>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="25"/>
-                    <ColumnDefinition Width="25"/>
-                </Grid.ColumnDefinitions>
-                <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.ColumnSpan="5"/>
+            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.ColumnSpan="5"/>
 
             <TextBlock Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Grid.ColumnSpan="5" Margin="10,2" FontSize="16">
                   <materialDesign:PackIcon Kind="Airplane" Height="24" Width="24" Margin="-2"/>irport Management
             </TextBlock>
             <Rectangle Fill="#00000000" Grid.ColumnSpan="5" PreviewMouseLeftButtonDown="DradWindow"/>
-                <Button Grid.Column="1" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Click="LogOutClick" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"  Focusable="False">
-                    LOG OUT
-                </Button>
-                <Button Grid.Column="3" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Click="MinimizeClick" Padding="0,6,0,0" materialDesign:ShadowAssist.ShadowDepth="Depth0"  Focusable="False">
-                    <materialDesign:PackIcon Kind="WindowMinimize"/>
-                </Button>
-                <Button Grid.Column="4" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Click="CloseClick" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth0" Focusable="False">
-                    <materialDesign:PackIcon Kind="WindowClose" />
-                </Button>
-            </Grid>
+            <Button Grid.Column="1" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Click="LogOutClick" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth0"  Focusable="False">
+                LOG OUT
+            </Button>
+            <Button Grid.Column="3" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Click="MinimizeClick" Padding="0,6,0,0" materialDesign:ShadowAssist.ShadowDepth="Depth0"  Focusable="False">
+                <materialDesign:PackIcon Kind="WindowMinimize"/>
+            </Button>
+            <Button Grid.Column="4" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  Click="CloseClick" Padding="0" materialDesign:ShadowAssist.ShadowDepth="Depth0" Focusable="False">
+                <materialDesign:PackIcon Kind="WindowClose" />
+            </Button>
+        </Grid>
 
-            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"/>
-            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3"/>
-            <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
-            <Grid Grid.Row="1" Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="32"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <ToolBarTray DockPanel.Dock="Top" Height="32">
-                    <ToolBar Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" ToolBarTray.IsLocked="True">
-                    <Button Height="30" Padding="40,5" Content="Airlines" Command="{Binding AirlinesClick}"></Button>
-                    <Button Height="30" Padding="40,5" Content="Aircrafts" Command="{Binding AircraftsClick}"></Button>
-                    <Button Height="30" Padding="40,5" Content="Airports" Command="{Binding AirportsClick}"/>
-                    <Button Height="30" Padding="40,5" Content="Countries" Command="{Binding CountriesClick}"/>
-                    <Button Height="30" Padding="40,5" Content="Cities" Command="{Binding CitiesClick}"/>
-                    <Button Height="30" Padding="40,5" Content="Schedule" Command="{Binding ScheduleClick}"/>
-                    </ToolBar>
-                </ToolBarTray>
-                <Frame Content="{Binding CurrentPage}" 
+        <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"/>
+        <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3"/>
+        <Rectangle Fill="{DynamicResource PrimaryHueMidBrush}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="547*"/>
+                <ColumnDefinition Width="249*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ToolBarTray Height="32" Grid.ColumnSpan="2">
+                <ToolBar x:Name="ToolBar" Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" ToolBarTray.IsLocked="True">
+                    <Button x:Name="Airlines" Height="30" Padding="40,5" Content="Airlines" IsEnabled="{Binding IsDialogOpen}" Command="{Binding AirlinesClick}"></Button>
+                    <Button x:Name="Planes" Height="30" Padding="40,5" Content="Planes" Command="{Binding AircraftsClick}"></Button>
+                    <Button x:Name="Airports" Height="30" Padding="40,5" Content="Airports" Command="{Binding AirportsClick}"/>
+                    <Button x:Name="Countries" Height="30" Padding="40,5" Content="Countries" Command="{Binding CountriesClick}"/>
+                    <Button x:Name="Cities" Height="30" Padding="40,5" Content="Cities" Command="{Binding CitiesClick}"/>
+                    <Button x:Name="Schedule" Height="30" Padding="40,5" Content="Schedule" Command="{Binding ScheduleClick}"/>
+                </ToolBar>
+            </ToolBarTray>
+            <Frame x:Name="frame" 
                    NavigationUIVisibility="Hidden" 
                    Grid.Row="1"
-                   Opacity="{Binding FrameOpacity}"/>
-            </Grid>
+                   Opacity="{Binding FrameOpacity}" Grid.ColumnSpan="2">
+                <Frame.Content>
+                    <Binding x:Name="binding" Path="CurrentPage"/>
+                </Frame.Content>
+            </Frame>
         </Grid>
+    </Grid>
 </Window>

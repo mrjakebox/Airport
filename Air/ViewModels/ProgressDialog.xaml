@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Air.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <ProgressBar Width="24" Height="24" Margin="16"
+    <ProgressBar Width="24" Height="24" Margin="16" 
                  Style="{DynamicResource MaterialDesignCircularProgressBar}"
                  IsIndeterminate="True"
-                 Value="33"/>
+                 Value="59"/>
 </UserControl>

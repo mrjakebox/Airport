@@ -50,9 +50,9 @@ namespace Air.Pages.Edit
                 _airline = new AirlineModel
                 {
                     AirlineID = value.AirlineID,
-                    AirlineAddress = value.AirlineAddress,
+                    Address = value.Address,
                     AirlineName = value.AirlineName,
-                    AirlinePhone = value.AirlinePhone
+                    Phone = value.Phone
                 };
             }
         }

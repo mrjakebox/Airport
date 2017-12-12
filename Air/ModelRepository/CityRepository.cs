@@ -1,6 +1,7 @@
 ﻿using Air.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -81,9 +82,9 @@ namespace Air.ModelRepository
             return CreateModel(reader);
         }
 
-        public async Task<IEnumerable<CityModel>> SelectListAsync()
+        public async Task<ObservableCollection<CityModel>> SelectListAsync()
         {
-            List<CityModel> cities = new List<CityModel>();
+            ObservableCollection<CityModel> cities = new ObservableCollection<CityModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -145,6 +146,11 @@ namespace Air.ModelRepository
             });
             int x = await command.ExecuteNonQueryAsync();
             return x == 1;
+        }
+
+        public Task<ObservableCollection<CityModel>> SelectListFormatAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

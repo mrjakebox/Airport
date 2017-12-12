@@ -43,32 +43,31 @@ namespace Air.ViewModels
             _cities = new Cities();
             _schedule = new Schedule();
             FrameOpacity = 1;
-            CurrentPage = _home;
+            CurrentPage = new Home();
         }
 
-        public ICommand HomeClick => new RelayCommand(obj => ShowOpacity(_home));
-        public ICommand AirlinesClick => new RelayCommand(obj => ShowOpacity(_airlines));
-        public ICommand AircraftsClick => new RelayCommand(obj => ShowOpacity(_aircrafts));
-        public ICommand AirportsClick => new RelayCommand(obj => ShowOpacity(_airports));
-        public ICommand CountriesClick => new RelayCommand(obj => ShowOpacity(_countries));
-        public ICommand CitiesClick => new RelayCommand(obj => ShowOpacity(_cities));
-        public ICommand ScheduleClick => new RelayCommand(obj => ShowOpacity(_schedule));
-
+        public ICommand HomeClick => new RelayCommand(obj => {  ShowOpacity(_home);  });
+        public ICommand AirlinesClick => new RelayCommand(obj => { ShowOpacity(_airlines); });
+        public ICommand AircraftsClick => new RelayCommand(obj => {  ShowOpacity(_aircrafts); });
+        public ICommand AirportsClick => new RelayCommand(obj => { ShowOpacity(_airports); });
+        public ICommand CountriesClick => new RelayCommand(obj => {  ShowOpacity(_countries); });
+        public ICommand CitiesClick => new RelayCommand(obj => {  ShowOpacity(_cities); });
+        public ICommand ScheduleClick => new RelayCommand(obj => {  ShowOpacity(_schedule); });
 
         private async void ShowOpacity(Page page)
         {
             await Task.Factory.StartNew(() =>
             {
-                for (double i = 1.0; i>0.0; i -= 0.1)
+                for (double i = 0.5; i>0.0; i -= 0.1)
                 {
                     FrameOpacity = i;
-                    Thread.Sleep(50);
+                    Thread.Sleep(40);
                 }
                 CurrentPage = page;
-                for (double i = 1.0; i < 1.1; i += 0.1)
+                for (double i = 0.5; i < 1.1; i += 0.1)
                 {
                     FrameOpacity = i;
-                    Thread.Sleep(50);
+                    Thread.Sleep(40);
                 }
             });
         }

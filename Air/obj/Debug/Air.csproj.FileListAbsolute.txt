@@ -42,3 +42,7 @@ D:\courseWork\Air\Air\obj\Debug\ViewModels\ProgressDialog.baml
 D:\courseWork\Air\Air\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\courseWork\Air\Air\obj\Debug\ViewModels\AcceptOrCancelDialog.g.cs
 D:\courseWork\Air\Air\obj\Debug\ViewModels\AcceptOrCancelDialog.baml
+D:\courseWork\Air\Air\obj\Debug\Pages\Edit\PlanesEdit.g.cs
+D:\courseWork\Air\Air\obj\Debug\Pages\Edit\PlanesEdit.baml
+D:\courseWork\Air\Air\obj\Debug\Pages\Edit\CountriesEdit.g.cs
+D:\courseWork\Air\Air\obj\Debug\Pages\Edit\CountriesEdit.baml

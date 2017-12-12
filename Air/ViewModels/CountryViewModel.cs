@@ -1,7 +1,6 @@
-﻿using Air.ModelConnection;
-using MaterialDesignThemes.Wpf;
-using Air.Models;
+﻿using Air.Models;
 using Air.Pages.Edit;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,32 +13,32 @@ using System.Windows.Input;
 
 namespace Air.ViewModels
 {
-    public class AirlineViewModel : PropertyObservable
+ public class CountryViewModel : PropertyObservable
     {
-        public ObservableCollection<AirlineModel> Airlines
+        public ObservableCollection<CountryModel> Countries
         {
-            get => MainController.Instance.Airlines;
+            get => MainController.Instance.Countries;
             set
             {
-                MainController.Instance.Airlines = value;
-                OnPropertyChanged("Airlines");
+                MainController.Instance.Countries = value;
+                OnPropertyChanged("Countries");
             }
         }
 
-        public AirlineViewModel()
+        public CountryViewModel()
         {
             Message = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(1000));
         }
 
-        private AirlineModel _selectedAirline;
+        private CountryModel _selectedCountry;
 
-        public AirlineModel SelectedAirline
+        public CountryModel SelectedCountry
         {
-            get => _selectedAirline;
+            get => _selectedCountry;
             set
             {
-                _selectedAirline = value;
-                OnPropertyChanged("SelectedAirline");
+                _selectedCountry = value;
+                OnPropertyChanged("SelectedCountry");
             }
         }
 
@@ -120,7 +119,7 @@ namespace Air.ViewModels
             {
                 return _updateCommand ?? (_updateCommand = new RelayCommand(obj =>
                 {
-                    if (SelectedAirline == null)
+                    if (SelectedCountry == null)
                     { Message.Enqueue("First, select an item"); return; }
                     RunDialogCommand = new AnotherCommandImplementation(RunUpdateDialog);
                     AcceptDialogCommand = new AnotherCommandImplementation(AcceptUpdateDialogAsync);
@@ -150,7 +149,7 @@ namespace Air.ViewModels
             {
                 return _deleteCommand ?? (_deleteCommand = new RelayCommand(obj =>
                 {
-                    if (SelectedAirline == null)
+                    if (SelectedCountry == null)
                     { Message.Enqueue("First, select an item"); return; }
                     RunDialogCommand = new AnotherCommandImplementation(RunDeleteDialog);
                     AcceptDialogCommand = new AnotherCommandImplementation(AcceptDeleteDialogAsync);
@@ -162,23 +161,23 @@ namespace Air.ViewModels
 
         private void RunUpdateDialog(object obj)
         {
-            DialogContent = new AirlinesEdit(SelectedAirline);
+            DialogContent = new CountriesEdit(SelectedCountry);
             IsDialogOpen = true;
         }
 
         private async void AcceptUpdateDialogAsync(object obj)
         {
             DialogContent = new ProgressDialog();
-            AirlineModel model = (obj as AirlineModel);
+            CountryModel model = (obj as CountryModel);
             await ModelConnection.SqlConnection.Instance.OpenAsync();
             using (SqlTransaction transaction = ((System.Data.SqlClient.SqlConnection)ModelConnection.SqlConnection.Instance.DbConnection).BeginTransaction())
             {
                 try
                 {
-                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Airlines(transaction).UpdateAsync(model)))
+                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Countries(transaction).UpdateAsync(model)))
                     {
                         transaction.Commit();
-                        Message.Enqueue("Successfully updated airline \"" + model.AirlineName + "\"");
+                        Message.Enqueue("Successfully updated country \"" + model.CountryName + "\"");
                     }
                     else
                     {
@@ -201,23 +200,23 @@ namespace Air.ViewModels
 
         private void RunCreateDialog(object obj)
         {
-            DialogContent = new AirlinesEdit();
+            DialogContent = new CountriesEdit();
             IsDialogOpen = true;
         }
 
         private async void AcceptCreateDialogAsync(object obj)
         {
             DialogContent = new ProgressDialog();
-            AirlineModel model = (obj as AirlineModel);
+            CountryModel model = (obj as CountryModel);
             await ModelConnection.SqlConnection.Instance.OpenAsync();
             using (SqlTransaction transaction = ((System.Data.SqlClient.SqlConnection)ModelConnection.SqlConnection.Instance.DbConnection).BeginTransaction())
             {
                 try
                 {
-                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Airlines(transaction).CreateAsync(model)))
+                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Countries(transaction).CreateAsync(model)))
                     {
                         transaction.Commit();
-                        Message.Enqueue("Successfully created airline \"" + model.AirlineName + "\"");
+                        Message.Enqueue("Successfully created country \"" + model.CountryName + "\"");
                     }
                     else
                     {
@@ -247,17 +246,17 @@ namespace Air.ViewModels
         private async void AcceptDeleteDialogAsync(object obj)
         {
             DialogContent = new ProgressDialog();
-            AirlineModel model = SelectedAirline;
+            CountryModel model = SelectedCountry;
             await ModelConnection.SqlConnection.Instance.OpenAsync();
             using (SqlTransaction transaction = ((System.Data.SqlClient.SqlConnection)ModelConnection.SqlConnection.Instance.DbConnection).BeginTransaction())
             {
                 try
                 {
-                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Airlines(transaction).DeleteAsync(model)))
+                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Countries(transaction).DeleteAsync(model)))
                     {
                         transaction.Commit();
-                        Airlines.Remove(model);
-                        Message.Enqueue("Successfully delete airline \"" + model.AirlineName + "\"");
+                        Countries.Remove(model);
+                        Message.Enqueue("Successfully delete country \"" + model.CountryName + "\"");
                     }
                     else
                     {
@@ -298,7 +297,7 @@ namespace Air.ViewModels
                     {
                         try
                         {
-                            Airlines = await Task.Run(() => ModelConnection.SqlConnection.Instance.Airlines(transaction).SelectListAsync());
+                            Countries = await Task.Run(() => ModelConnection.SqlConnection.Instance.Countries(transaction).SelectListAsync());
                             transaction.Commit();
                             Message.Enqueue("Data successfully refreshed");
                             UpdateDateTime = DateTime.Now.ToLongTimeString().ToString();
@@ -317,6 +316,11 @@ namespace Air.ViewModels
                     IsDialogOpen = false;
                 }));
             }
+        }
+
+        public void Grid_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("KEK");
         }
     }
 }

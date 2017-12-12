@@ -1,6 +1,7 @@
 ﻿using Air.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -27,8 +28,8 @@ namespace Air.ModelRepository
             {
                 AirlineID = Convert.ToInt32(reader["AirlineID"]),
                 AirlineName = reader["AirlineName"].ToString(),
-                AirlinePhone = reader["AirlinePhone"].ToString(),
-                AirlineAddress = reader["AirlineAddress"].ToString()
+                Phone = reader["Phone"].ToString(),
+                Address = reader["Address"].ToString()
             };
         }
 
@@ -41,8 +42,8 @@ namespace Air.ModelRepository
             command.Parameters.AddRange(new[]
             {
                 new SqlParameter("@AirlineName", item.AirlineName),
-                new SqlParameter("@AirlinePhone", item.AirlinePhone),
-                new SqlParameter("@AirlineAddress", item.AirlineAddress)
+                new SqlParameter("@Phone", item.Phone),
+                new SqlParameter("@Address", item.Address)
             });
             return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
         }
@@ -63,9 +64,9 @@ namespace Air.ModelRepository
             _connection.Dispose();
         }
 
-        public async Task<IEnumerable<AirlineModel>> SelectListAsync()
+        public async Task<ObservableCollection<AirlineModel>> SelectListAsync()
         {
-            List<AirlineModel> airlines = new List<AirlineModel>();
+            ObservableCollection<AirlineModel> airlines = new ObservableCollection<AirlineModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
@@ -82,7 +83,7 @@ namespace Air.ModelRepository
                 }
             }
             reader.Close();
-
+            
             return airlines;
         }
 
@@ -109,10 +110,37 @@ namespace Air.ModelRepository
             {
                 new SqlParameter("@AirlineID", item.AirlineID),
                 new SqlParameter("@AirlineName", item.AirlineName),
-                new SqlParameter("@AirlinePhone", item.AirlinePhone),
-                new SqlParameter("@AirlineAddress", item.AirlineAddress)
+                new SqlParameter("@Phone", item.Phone),
+                new SqlParameter("@Address", item.Address)
             });
             return await Task.Run(() => command.ExecuteNonQueryAsync()) == 1;
+        }
+
+        public async Task<ObservableCollection<AirlineModel>> SelectListFormatAsync()
+        {
+            ObservableCollection<AirlineModel> airlines = new ObservableCollection<AirlineModel>();
+
+            SqlCommand command = _connection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "AirlineListSelectFormat";
+            command.Transaction = _transaction;
+
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            if (reader.HasRows)
+            {
+                while (await reader.ReadAsync())
+                {
+                    airlines.Add(new AirlineModel
+                    {
+                        AirlineID = Convert.ToInt32(reader["AirlineID"]),
+                        AirlineName = reader["AirlineName"].ToString()
+                    });
+                }
+            }
+            reader.Close();
+
+            return airlines;
         }
     }
 }

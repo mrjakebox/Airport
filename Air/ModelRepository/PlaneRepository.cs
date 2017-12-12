@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace Air.ModelRepository
 {
@@ -28,7 +29,8 @@ namespace Air.ModelRepository
                 PlaneID = Convert.ToInt32(reader["PlaneID"]),
                 AirlineID = Convert.ToInt32(reader["AirlineID"]),
                 AirplaneModel = reader["AirplaneModel"].ToString(),
-                OnboardNumber = reader["OnboardNumber"].ToString()
+                OnboardNumber = reader["OnboardNumber"].ToString(),
+                AirlineName = reader["AirlineName"].ToString()
             };
         }
 
@@ -76,13 +78,36 @@ namespace Air.ModelRepository
             return CreateModel(reader);
         }
 
-        public async Task<IEnumerable<PlaneModel>> SelectListAsync()
+        public async Task<ObservableCollection<PlaneModel>> SelectListAsync()
         {
-            List<PlaneModel> planes = new List<PlaneModel>();
+            ObservableCollection<PlaneModel> planes = new ObservableCollection<PlaneModel>();
 
             SqlCommand command = _connection.CreateCommand();
             command.CommandType = CommandType.StoredProcedure;
             command.CommandText = "PlaneSelectList";
+            command.Transaction = _transaction;
+
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            if (reader.HasRows)
+            {
+                while (await reader.ReadAsync())
+                {
+                    planes.Add(CreateModel(reader));
+                }
+            }
+            reader.Close();
+
+            return planes;
+        }
+
+        public async Task<ObservableCollection<PlaneModel>> SelectListFormatAsync()
+        {
+            ObservableCollection<PlaneModel> planes = new ObservableCollection<PlaneModel>();
+
+            SqlCommand command = _connection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "PlaneListSelectFormat";
             command.Transaction = _transaction;
 
             SqlDataReader reader = await command.ExecuteReaderAsync();

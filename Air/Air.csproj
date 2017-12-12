@@ -88,6 +88,12 @@
     <Compile Include="Pages\Edit\AirlinesEdit.xaml.cs">
       <DependentUpon>AirlinesEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Edit\CountriesEdit.xaml.cs">
+      <DependentUpon>CountriesEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Edit\PlanesEdit.xaml.cs">
+      <DependentUpon>PlanesEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ModelRepository\IRepository.cs" />
     <Compile Include="Validation\AddressValidationRule.cs" />
@@ -97,6 +103,7 @@
       <DependentUpon>AcceptOrCancelDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AirlineViewModel.cs" />
+    <Compile Include="ViewModels\CountryViewModel.cs" />
     <Compile Include="ViewModels\ManagementViewModel.cs" />
     <Compile Include="Pages\Planes.xaml.cs">
       <DependentUpon>Planes.xaml</DependentUpon>
@@ -122,6 +129,7 @@
     <Compile Include="Pages\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\PlaneViewModel.cs" />
     <Compile Include="ViewModels\ProgressDialog.xaml.cs">
       <DependentUpon>ProgressDialog.xaml</DependentUpon>
     </Compile>
@@ -162,6 +170,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Edit\AirlinesEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Edit\CountriesEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Edit\PlanesEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

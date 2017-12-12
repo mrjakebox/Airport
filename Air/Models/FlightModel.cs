@@ -18,7 +18,7 @@ namespace Air.Models
         private string _airportName;
         private string _cityName;
         private string _countryName;
-        private string _flightType;
+        private bool _flightType;
         private DateTime _dateTimeStart;
         private string _duration;
         private DateTime _dateTimeArrival;
@@ -136,7 +136,7 @@ namespace Air.Models
             }
         }
 
-        public string FlightType
+        public bool FlightType
         {
             get => _flightType;
             set

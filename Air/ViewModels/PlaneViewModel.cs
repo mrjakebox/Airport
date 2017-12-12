@@ -1,7 +1,6 @@
-﻿using Air.ModelConnection;
-using MaterialDesignThemes.Wpf;
-using Air.Models;
+﻿using Air.Models;
 using Air.Pages.Edit;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,37 +8,48 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Air.ViewModels
 {
-    public class AirlineViewModel : PropertyObservable
+     public class PlaneViewModel : PropertyObservable
     {
-        public ObservableCollection<AirlineModel> Airlines
+        public ObservableCollection<PlaneModel> Planes
         {
-            get => MainController.Instance.Airlines;
+            get => MainController.Instance.Planes;
             set
             {
-                MainController.Instance.Airlines = value;
-                OnPropertyChanged("Airlines");
+                MainController.Instance.Planes = value;
+                OnPropertyChanged("Planes");
             }
         }
 
-        public AirlineViewModel()
+        public PlaneViewModel()
         {
             Message = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(1000));
         }
 
-        private AirlineModel _selectedAirline;
-
-        public AirlineModel SelectedAirline
+        private ObservableCollection<AirlineModel> _airlineList;
+        private ObservableCollection<AirlineModel> AirlineList
         {
-            get => _selectedAirline;
+            get => _airlineList;
             set
             {
-                _selectedAirline = value;
-                OnPropertyChanged("SelectedAirline");
+                _airlineList = value;
+                OnPropertyChanged("AirlineList");
+            }
+        }
+
+
+        private PlaneModel _selectedPlane;
+
+        public PlaneModel SelectedPlane
+        {
+            get => _selectedPlane;
+            set
+            {
+                _selectedPlane = value;
+                OnPropertyChanged("SelectedPlane");
             }
         }
 
@@ -118,10 +128,12 @@ namespace Air.ViewModels
         {
             get
             {
-                return _updateCommand ?? (_updateCommand = new RelayCommand(obj =>
+                return _updateCommand ?? (_updateCommand = new RelayCommand(async obj =>
                 {
-                    if (SelectedAirline == null)
+                    if (SelectedPlane == null)
                     { Message.Enqueue("First, select an item"); return; }
+                    await GetComboListAsync();
+                    DialogContent = new ProgressDialog();
                     RunDialogCommand = new AnotherCommandImplementation(RunUpdateDialog);
                     AcceptDialogCommand = new AnotherCommandImplementation(AcceptUpdateDialogAsync);
                     CancelDialogCommand = new AnotherCommandImplementation(CancelDialog);
@@ -129,13 +141,37 @@ namespace Air.ViewModels
                 }));
             }
         }
-
+        private async Task GetComboListAsync()
+        {
+            DialogContent = new ProgressDialog();
+            IsDialogOpen = true;
+            await ModelConnection.SqlConnection.Instance.OpenAsync();
+            using (SqlTransaction transaction = ((System.Data.SqlClient.SqlConnection)ModelConnection.SqlConnection.Instance.DbConnection).BeginTransaction())
+            {
+                try
+                {
+                    AirlineList = await Task.Run(() => ModelConnection.SqlConnection.Instance.Airlines(transaction).SelectListFormatAsync());
+                    transaction.Commit();
+                }
+                catch (SqlException ex)
+                {
+                    Message.Enqueue(ex.Message);
+                    transaction.Rollback();
+                }
+                finally
+                {
+                    ModelConnection.SqlConnection.Instance.Close();
+                }
+            }
+            IsDialogOpen = false;
+        }
         public RelayCommand CreateCommand
         {
             get
             {
-                return _createCommand ?? (_createCommand = new RelayCommand(obj =>
+                return _createCommand ?? (_createCommand = new RelayCommand(async obj =>
                 {
+                    await GetComboListAsync();
                     RunDialogCommand = new AnotherCommandImplementation(RunCreateDialog);
                     AcceptDialogCommand = new AnotherCommandImplementation(AcceptCreateDialogAsync);
                     CancelDialogCommand = new AnotherCommandImplementation(CancelDialog);
@@ -150,7 +186,7 @@ namespace Air.ViewModels
             {
                 return _deleteCommand ?? (_deleteCommand = new RelayCommand(obj =>
                 {
-                    if (SelectedAirline == null)
+                    if (SelectedPlane == null)
                     { Message.Enqueue("First, select an item"); return; }
                     RunDialogCommand = new AnotherCommandImplementation(RunDeleteDialog);
                     AcceptDialogCommand = new AnotherCommandImplementation(AcceptDeleteDialogAsync);
@@ -162,23 +198,23 @@ namespace Air.ViewModels
 
         private void RunUpdateDialog(object obj)
         {
-            DialogContent = new AirlinesEdit(SelectedAirline);
+            DialogContent = new PlanesEdit(SelectedPlane, AirlineList);
             IsDialogOpen = true;
         }
 
         private async void AcceptUpdateDialogAsync(object obj)
         {
             DialogContent = new ProgressDialog();
-            AirlineModel model = (obj as AirlineModel);
+            PlaneModel model = (obj as PlaneModel);
             await ModelConnection.SqlConnection.Instance.OpenAsync();
             using (SqlTransaction transaction = ((System.Data.SqlClient.SqlConnection)ModelConnection.SqlConnection.Instance.DbConnection).BeginTransaction())
             {
                 try
                 {
-                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Airlines(transaction).UpdateAsync(model)))
+                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Planes(transaction).UpdateAsync(model)))
                     {
                         transaction.Commit();
-                        Message.Enqueue("Successfully updated airline \"" + model.AirlineName + "\"");
+                        Message.Enqueue("Successfully updated plane \"" + model.OnboardNumber + "\"");
                     }
                     else
                     {
@@ -201,23 +237,23 @@ namespace Air.ViewModels
 
         private void RunCreateDialog(object obj)
         {
-            DialogContent = new AirlinesEdit();
+            DialogContent = new PlanesEdit(AirlineList);
             IsDialogOpen = true;
         }
 
         private async void AcceptCreateDialogAsync(object obj)
         {
             DialogContent = new ProgressDialog();
-            AirlineModel model = (obj as AirlineModel);
+            PlaneModel model = (obj as PlaneModel);
             await ModelConnection.SqlConnection.Instance.OpenAsync();
             using (SqlTransaction transaction = ((System.Data.SqlClient.SqlConnection)ModelConnection.SqlConnection.Instance.DbConnection).BeginTransaction())
             {
                 try
                 {
-                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Airlines(transaction).CreateAsync(model)))
+                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Planes(transaction).CreateAsync(model)))
                     {
                         transaction.Commit();
-                        Message.Enqueue("Successfully created airline \"" + model.AirlineName + "\"");
+                        Message.Enqueue("Successfully created airline \"" + model.OnboardNumber + "\"");
                     }
                     else
                     {
@@ -247,17 +283,16 @@ namespace Air.ViewModels
         private async void AcceptDeleteDialogAsync(object obj)
         {
             DialogContent = new ProgressDialog();
-            AirlineModel model = SelectedAirline;
+            PlaneModel model = SelectedPlane;
             await ModelConnection.SqlConnection.Instance.OpenAsync();
             using (SqlTransaction transaction = ((System.Data.SqlClient.SqlConnection)ModelConnection.SqlConnection.Instance.DbConnection).BeginTransaction())
             {
                 try
                 {
-                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Airlines(transaction).DeleteAsync(model)))
+                    if (await Task.Run(() => ModelConnection.SqlConnection.Instance.Planes(transaction).DeleteAsync(model)))
                     {
                         transaction.Commit();
-                        Airlines.Remove(model);
-                        Message.Enqueue("Successfully delete airline \"" + model.AirlineName + "\"");
+                        Message.Enqueue("Successfully delete plane \"" + model.OnboardNumber + "\"");
                     }
                     else
                     {
@@ -298,7 +333,7 @@ namespace Air.ViewModels
                     {
                         try
                         {
-                            Airlines = await Task.Run(() => ModelConnection.SqlConnection.Instance.Airlines(transaction).SelectListAsync());
+                            Planes = await Task.Run(() => ModelConnection.SqlConnection.Instance.Planes(transaction).SelectListAsync());
                             transaction.Commit();
                             Message.Enqueue("Data successfully refreshed");
                             UpdateDateTime = DateTime.Now.ToLongTimeString().ToString();
@@ -313,7 +348,6 @@ namespace Air.ViewModels
                             ModelConnection.SqlConnection.Instance.Close();
                         }
                     }
-
                     IsDialogOpen = false;
                 }));
             }

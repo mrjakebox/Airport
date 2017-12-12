@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace Air.ModelRepository
     public interface IRepository<T> : IDisposable
         where T : class
     {
-        Task<IEnumerable<T>> SelectListAsync();
+        Task<ObservableCollection<T>> SelectListAsync();
+        Task<ObservableCollection<T>> SelectListFormatAsync();
         Task<bool> CreateAsync(T item);
         Task<bool> UpdateAsync(T item);
         Task<bool> DeleteAsync(T item);

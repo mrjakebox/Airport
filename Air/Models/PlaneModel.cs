@@ -11,11 +11,11 @@ namespace Air.Models
 {
     public class PlaneModel : PropertyObservable
     {
-        int _planeID;
-        int _airlineID;
-        string _airplaneModel;
-        string _onboardNumber;
-        string _airlineName;
+        private int _planeID;
+        private int _airlineID;
+        private string _airplaneModel;
+        private string _onboardNumber;
+        private string _airlineName;
 
         public int PlaneID
         {
@@ -32,14 +32,11 @@ namespace Air.Models
             get => _airlineID;
             set
             {
-                _planeID = value;
+                _airlineID = value;
                 OnPropertyChanged("AirlineID");
             }
         }
 
-        [RegularExpression(@"^[A-zА-я0-9-]+$", ErrorMessage = "The airplane model must contain only numbers, letters and hyphens")]
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "The airplane model must contain from 3 to 20 characters")]
-        [Required(ErrorMessage = "There is no airplane model")]
         public string AirplaneModel
         {
             get => _airplaneModel;
@@ -50,10 +47,6 @@ namespace Air.Models
             }
         }
 
-
-        [RegularExpression(@"^[A-zА-я0-9-]+$", ErrorMessage = "The onboard number must contain only numbers, letters and hyphens")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "The onboard number must contain from 3 to 50 characters")]
-        [Required(ErrorMessage = "There is no onboard number")]
         public string OnboardNumber
         {
             get => _onboardNumber;
@@ -61,6 +54,16 @@ namespace Air.Models
             {
                 _onboardNumber = value;
                 OnPropertyChanged("OnboardNumber");
+            }
+        }
+
+        public string AirlineName
+        {
+            get => _airlineName;
+            set
+            {
+                _airlineName = value;
+                OnPropertyChanged("AirlineName");
             }
         }
     }

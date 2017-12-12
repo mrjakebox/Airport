@@ -11,13 +11,14 @@
      TextElement.FontSize="16"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
-    <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}" DialogContent="{Binding DialogContent}" CloseOnClickAway="True">
+    <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}" DialogContent="{Binding DialogContent}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -25,24 +26,27 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Label FontSize="14" Name="Title" Content="AIRLINES" Background="{DynamicResource PrimaryHueMidBrush}"  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
-            <ListView  Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding Airlines}" SelectedItem="{Binding SelectedAirline}">
+            <Label FontSize="14" Name="Title" Content="AIRLINES" Background="{DynamicResource PrimaryHueMidBrush}"  Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.ColumnSpan="6" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
+            <ListView Grid.Row="1" Grid.ColumnSpan="6" ItemsSource="{Binding Airlines}" SelectedItem="{Binding SelectedAirline}">
                 <ListView.View>
                     <GridView >
-                        <GridViewColumn DisplayMemberBinding="{Binding AirlineName}" Header="Name"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding AirlinePhone}" Header="Phone" />
-                        <GridViewColumn DisplayMemberBinding="{Binding AirlineAddress}" Header="Address" />
+                        <GridViewColumn DisplayMemberBinding="{Binding AirlineName}" Width="auto" Header="Name"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Phone}"  Width="auto" Header="Phone" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Address}"  Width="auto" Header="Address" />
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Grid.Row="2" Content="REFRESH" Command="{Binding RefreshCommand}" Margin="10,9" Height="Auto"/>
-            <Button Grid.Row="2" Grid.Column="1" Content="UPDATE" Command="{Binding UpdateCommand}" Margin="10,9" Height="Auto"/>
-            <Button Grid.Row="2" Grid.Column="2" Content="CREATE" Command="{Binding CreateCommand}" Margin="10,9" Height="Auto"/>
-            <Button Style="{StaticResource MaterialDesignFlatButton}" Grid.Row="2" Content="DELETE" Command="{Binding DeleteCommand}" Grid.Column="4" Margin="10,9" Height="Auto"/>
-            <materialDesign:Snackbar MessageQueue="{Binding Message}" IsActive="{Binding IsSnackbarActive}"
-                                             x:Name="SnackbarThree" Grid.ColumnSpan="3"  Grid.Row="2" Grid.Column="1"/>
-            <Label FontSize="14" Grid.ColumnSpan="2" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" VerticalAlignment="Top" Content="{Binding UpdateDateTime}" Grid.Column="3" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+            <Button materialDesign:ShadowAssist.ShadowDepth="Depth0" Padding="0" Grid.Row="2" Content="REFRESH" Command="{Binding RefreshCommand}" Margin="10,9" Height="Auto"/>
+            <Button materialDesign:ShadowAssist.ShadowDepth="Depth0" Padding="0" Grid.Row="2" Grid.Column="1" Content="UPDATE" Command="{Binding UpdateCommand}" Margin="10,9" Height="Auto"/>
+            <Button materialDesign:ShadowAssist.ShadowDepth="Depth0" Padding="0" Grid.Row="2" Grid.Column="2" Content="CREATE" Command="{Binding CreateCommand}" Margin="10,9" Height="Auto"/>
+            <Button materialDesign:ShadowAssist.ShadowDepth="Depth0" Padding="0" Style="{StaticResource MaterialDesignFlatButton}" Grid.Row="2" Content="DELETE" Command="{Binding DeleteCommand}" Grid.Column="5" Margin="10,9" Height="Auto"/>
+            <Label FontSize="14" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Center" Content="NUMBER OF ROWS:" Grid.Column="3" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+            <Label FontSize="14" Foreground="{DynamicResource PrimaryHueMidBrush}" VerticalAlignment="Center" Content="{Binding Airlines.Count}" Grid.Column="4" Grid.Row="2"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+
+            <materialDesign:Snackbar MessageQueue="{Binding Message}" IsActive="{Binding IsSnackbarActive}" HorizontalAlignment="Stretch"
+                                             x:Name="SnackbarThree" Grid.ColumnSpan="6"  Grid.Row="1" />
+            <Label FontSize="14" Grid.ColumnSpan="2" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" VerticalAlignment="Top" Content="{Binding UpdateDateTime}" Grid.Column="4" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+            
         </Grid>
     </materialDesign:DialogHost>
-
 </Page>
